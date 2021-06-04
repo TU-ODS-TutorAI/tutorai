@@ -1,5 +1,5 @@
 const https = require('http')
-const DELAY = 2 * 1000
+const DELAY = 500
 
 function http_get(link, func_cb) {
     const req = https.request(link, res => {
@@ -12,9 +12,16 @@ function http_get(link, func_cb) {
 }
 
 http_get("http://127.0.0.1:3000/moses", (data) => {
-    const response = JSON.parse(data)
-    console.log(response)
+    const modules = JSON.parse(data).modules
+    let i = 0
     const loop = setInterval(() => {
-        console.log(response.modules[0])
+        const current = i
+        http_get(`http://127.0.0.1:3000/moses/${modules[current].number}`, (_module) => {
+            const module = JSON.parse(_module)
+            console.log(current + ": " + module.german.title)
+        })
+        i++
+        if (i >= modules.length)
+            clearInterval(loop)
     }, DELAY)
 })
