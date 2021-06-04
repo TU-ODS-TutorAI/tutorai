@@ -1,0 +1,12 @@
+site_name: TutorAI Documentation
+
+theme:
+    name: readthedocs
+
+markdown_extensions:
+    - codehilite
+
+nav:
+    - Home: "index.md"
+    - API:
+        - Machine Learning QnA Engine: "api/machine_learning_qna_engine.md"
