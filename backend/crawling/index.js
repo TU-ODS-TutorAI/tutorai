@@ -24,17 +24,46 @@ const MosesModule = mongoose.model('MosesModule', new mongoose.Schema({
     contactPerson: { type: String },
     email: { type: String },
     credits: { type: Number },
-    typeOfExam: { type: String },
     website: { type: String },
     german: {
         learningOutcomes: { type: String },
         content: { type: String },
         title: { type: String },
+        teachingAndLearningMethods: { type: String },
+        desirablePrerequisites: { type: String },
+        mandatoryRequirements: { type: String },
+        grading: { type: String },
+        typeOfExam: { type: String },
+        typeOfPortfolioExamination: { type: String },
+        language: { type: String },
+        duration: { type: String },
+        testDescription: { type: String },
+        durationOfTheModule: { type: String },
+        maximumNumberOfParticipants: { type: String },
+        registrationProcedures: { type: String },
+        lectureNotes: { type: String },
+        electronicalLectureNotes: { type: String },
+        literature: { type: String }
     },
     english: {
         learningOutcomes: { type: String },
         content: { type: String },
-        title: { type: String }
+        title: { type: String },
+        teachingAndLearningMethods: { type: String },
+        desirablePrerequisites: { type: String },
+        mandatoryRequirements: { type: String },
+        grading: { type: String },
+        typeOfExam: { type: String },
+        typeOfPortfolioExamination: { type: String },
+        language: { type: String },
+        duration: { type: String },
+        testDescription: { type: String },
+        durationOfTheModule: { type: String },
+        maximumNumberOfParticipants: { type: String },
+        registrationProcedures: { type: String },
+        lectureNotes: { type: String },
+        electronicalLectureNotes: { type: String },
+        literature: { type: String }
     }
 }))
 
@@ -92,9 +121,39 @@ function createModule(newModule, modulInfo, englishData, germanData) {
     newModule.german.title = Module.getTitle(germanData, 1)
     newModule.german.learningOutcomes = Module.getLearningOutcomes(germanData, 1)
     newModule.german.content = Module.getContent(germanData, 1)
+    newModule.german.teachingAndLearningMethods = Module.getTeachingAndLearningMethods(germanData, 1)
+    newModule.german.desirablePrerequisites = Module.getDesirablePrerequisites(germanData, 1)
+    newModule.german.mandatoryRequirements = Module.getMandatoryRequirements(germanData, 1)
+    newModule.german.grading = Module.getGrading(germanData, 1)
+    newModule.german.typeOfExam = Module.getTypeOfExam(germanData, 1)
+    newModule.german.typeOfPortfolioExamination = Module.getTypeOfPortfolioExamination(germanData, 1)
+    newModule.german.language = Module.getLanguage(germanData, 1)
+    newModule.german.duration = Module.getDuration(germanData, 1)
+    newModule.german.testDescription = Module.getTestDescription(germanData, 1)
+    newModule.german.durationOfTheModule = Module.getDurationOfTheModule(germanData, 1)
+    newModule.german.maximumNumberOfParticipants = Module.getMaximumNumberOfParticipants(germanData, 1)
+    newModule.german.registrationProcedures = Module.getRegistrationProcedures(germanData, 1)
+    newModule.german.lectureNotes = Module.getLectureNotes(germanData, 1)
+    newModule.german.electronicalLectureNotes = Module.getElectronicalLectureNotes(germanData, 1)
+    newModule.german.literature = Module.getLiterature(germanData, 1)
     newModule.english.title = Module.getTitle(englishData, 2)
     newModule.english.learningOutcomes = Module.getLearningOutcomes(englishData, 2)
     newModule.english.content = Module.getContent(englishData, 2)
+    newModule.english.teachingAndLearningMethods = Module.getTeachingAndLearningMethods(englishData, 2)
+    newModule.english.desirablePrerequisites = Module.getDesirablePrerequisites(englishData, 2)
+    newModule.english.mandatoryRequirements = Module.getMandatoryRequirements(englishData, 2)
+    newModule.english.grading = Module.getGrading(englishData, 2)
+    newModule.english.typeOfExam = Module.getTypeOfExam(englishData, 2)
+    newModule.english.typeOfPortfolioExamination = Module.getTypeOfPortfolioExamination(englishData, 2)
+    newModule.english.language = Module.getLanguage(englishData, 2)
+    newModule.english.duration = Module.getDuration(englishData, 2)
+    newModule.english.testDescription = Module.getTestDescription(englishData, 2)
+    newModule.english.durationOfTheModule = Module.getDurationOfTheModule(englishData, 2)
+    newModule.english.maximumNumberOfParticipants = Module.getMaximumNumberOfParticipants(englishData, 2)
+    newModule.english.registrationProcedures = Module.getRegistrationProcedures(englishData, 2)
+    newModule.english.lectureNotes = Module.getLectureNotes(englishData, 2)
+    newModule.english.electronicalLectureNotes = Module.getElectronicalLectureNotes(englishData, 2)
+    newModule.english.literature = Module.getLiterature(englishData, 2)
     newModule.faculty = Module.getFaculty(germanData)
     newModule.office = Module.getOffice(germanData)
     newModule.institute = Module.getInstitute(germanData)
@@ -103,7 +162,6 @@ function createModule(newModule, modulInfo, englishData, germanData) {
     newModule.contactPerson = Module.getContactPerson(germanData)
     newModule.email = Module.getEmail(germanData)
     newModule.credits = Module.getCredits(germanData)
-    newModule.typeOfExam = Module.getTypeOfExam(englishData)
     newModule.website = Module.getWebsite(germanData)
     newModule.save()
     return newModule
