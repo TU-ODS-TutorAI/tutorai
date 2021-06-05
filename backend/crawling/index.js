@@ -46,6 +46,26 @@ app.get('/moses', (req, res) => {
     res.send({ modules: modules })
 })
 
+app.get('/moses/search/:property', (req, res) => {
+    const property = req.params.property
+    if (!property) {
+        res.status(400).send({ err: "Bad request" })
+        return
+    }
+
+    const query = req.query.q
+    if (!query) {
+        res.status(400).send({ err: "Bad request, no query" })
+        return
+    }
+
+    let mongoQuery = {}
+    mongoQuery[property] = new RegExp(query, 'i')
+    MosesModule.find(mongoQuery, (err, doc) => {
+        res.send(doc)
+    })
+})
+
 app.get('/moses/:id', (req, res) => {
     const moduleNumber = parseInt(req.params.id)
     if (!moduleNumber) {
