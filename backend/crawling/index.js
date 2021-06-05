@@ -49,19 +49,19 @@ app.get('/moses', (req, res) => {
 app.get('/moses/:id', (req, res) => {
     const moduleNumber = parseInt(req.params.id)
     if (!moduleNumber) {
-        res.send({ err: "Wrong module not found" })
+        res.status(400).send({ err: "Bad request" })
         return
     }
     const modulInfo = modules.find(e => e.number === moduleNumber)
     if (!modulInfo) {
-        res.send({ err: "Wrong module not found" })
+        res.status(404).send({ err: "Wrong module number, not found" })
         return
     }
-    findModuleWithModuleNumber(moduleNumber, modulInfo, res)
+    findModuleWithModuleNumber(modulInfo, res)
 })
 
-function findModuleWithModuleNumber(moduleNumber, modulInfo, res) {
-    MosesModule.findOne({ 'number': moduleNumber }, function (err, doc) {
+function findModuleWithModuleNumber(modulInfo, res) {
+    MosesModule.findOne({ 'number': modulInfo.number }, function (err, doc) {
         if (err || !doc) {
             console.log("no db entry found. crawling, saving in db and sending...")
             https(config.resources.moses.getFullLinkTo(modulInfo.number, modulInfo.version, 1), (germanData) => {
