@@ -35,34 +35,33 @@ describe('Modul', function () {
         })
     })
 
-    describe('#getTitel(html)', function () {
+    describe('#getTitle(html)', function () {
         it(`should be Einführung in die Programmierung`, function () {
             assert.strictEqual(Modul.getTitle(module_html, 1), "Einführung in die Programmierung")
         })
     })
 
-    describe('#getLernergebnisse(html)', function () {
-        it(`should be Einführung in die Programmierung`, function () {
-            assert.strictEqual(Modul.getLearningOutcomes(module_html, 1), 'Die Studierenden haben Grundkenntnisse der (imperativen) Programmierung sowie Kenntnisse der grundlegenden Datenstrukturen und Algorithmen.\r\n' +
-                'Spezifischer:\r\n' +
-                '* Studierende sind mit grundlegenden Konzepten von Programmiersprachen vertraut.\r\n' +
-                '* Studierende können den Ablauf von Programmen nachvollziehen und selbst kleinere Programme entwickeln\r\n' +
-                '* Studierende können die Komplexität (insbesondere die Laufzeit) von Algorithmen exakt (für einfache Beispiele) und asymptotisch (O-Notation) abschätzen.\r\n' +
-                '* Studierende können Beweise zur Korrektheit von Programmen nachvollziehen und einfachere Beweise selbst führen.\r\n' +
+    describe('#getLearningOutcomes(html)', function () {
+        it(`should be Learining Outcomes of Module`, function () {
+            assert.strictEqual(Modul.getLearningOutcomes(module_html, 1), 'Die Studierenden haben Grundkenntnisse der (imperativen) Programmierung sowie Kenntnisse der grundlegenden Datenstrukturen und Algorithmen.\n' +
+                'Spezifischer:\n' +
+                '* Studierende sind mit grundlegenden Konzepten von Programmiersprachen vertraut.\n' +
+                '* Studierende können den Ablauf von Programmen nachvollziehen und selbst kleinere Programme entwickeln\n' +
+                '* Studierende können die Komplexität (insbesondere die Laufzeit) von Algorithmen exakt (für einfache Beispiele) und asymptotisch (O-Notation) abschätzen.\n' +
+                '* Studierende können Beweise zur Korrektheit von Programmen nachvollziehen und einfachere Beweise selbst führen.\n' +
                 '* Studierende sind mit den Stärken und Schwächen von einfacheren und fortgeschritteneren Sortieralgorithmen vertraut und können mit diesem Wissen die Wahl eines geeigneten Sortieralgorithmus begründen.')
         })
     })
 
-    describe('#getLehrinhalte(html)', function () {
-        it(`should be Einführung in die Programmierung`, function () {
-            assert.strictEqual(Modul.getContent(module_html, 1), 'In diesem Modul werden grundlegende Programmierkonzepte der imperativen Programmierung vermittelt:\r\n' +
-                '* Grundlegende Konzepte von Programmiersprachen\r\n' +
-                '* Verständnis des Ablaufs von Programmen\r\n' +
-                '* Entwicklung kleinerer Programme\r\n' +
-                '* Aufwandsabschätzungen (O-Notation)\r\n' +
-                '* Korrektheit\r\n' +
-                '* Suchen und Sortieren\r\n' +
-                '\r\n' +
+    describe('#getContent(html)', function () {
+        it(`should be Content of Module`, function () {
+            assert.strictEqual(Modul.getContent(module_html, 1), 'In diesem Modul werden grundlegende Programmierkonzepte der imperativen Programmierung vermittelt:\n' +
+                '* Grundlegende Konzepte von Programmiersprachen\n' +
+                '* Verständnis des Ablaufs von Programmen\n' +
+                '* Entwicklung kleinerer Programme\n' +
+                '* Aufwandsabschätzungen (O-Notation)\n' +
+                '* Korrektheit\n' +
+                '* Suchen und Sortieren\n' +
                 'Innerhalb der ersten beiden Wochen des Semesters findet ein C-Kurs, bestehend aus Vorlesung, Tutorien und Rechnerübungen, statt. Im Rahmen dieses C-Kurses wird anhand praktischer Beispiele in die Programmierung mit C eingeführt.')
         })
     })
