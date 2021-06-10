@@ -1,5 +1,5 @@
 <template>
-  <div v-if="this.right == 'true'">
+  <div v-if="this.right">
     <div class="chat-r">
       <div class="sp"></div>
       <div class="mess mess-r">

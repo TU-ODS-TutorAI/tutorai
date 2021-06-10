@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     sendRequest(message) {
-      this.messages.push({ msg: message, right: "true" });
+      this.messages.push({ msg: message, right: true });
       console.log(this.messages);
       axios({
         method: "GET",
@@ -45,7 +45,7 @@ export default {
         },
       }).then(
         (result) => {
-          this.messages.push({ msg: result, right: "false" });
+          this.messages.push({ msg: result, right: false });
           console.log(this.messages);
         },
         (error) => {
