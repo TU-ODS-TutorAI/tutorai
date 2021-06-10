@@ -1,5 +1,5 @@
 <template>
-  <div v-if="right == true">
+  <div v-if="this.right == 'true'">
     <div class="chat-r">
       <div class="sp"></div>
       <div class="mess mess-r">
@@ -10,7 +10,7 @@
   <div v-else>
     <div class="chat-l">
       <div class="mess">
-        <p>{{ "aaaa" }}</p>
+        <p>{{ msg }}</p>
       </div>
       <div class="sp"></div>
     </div>

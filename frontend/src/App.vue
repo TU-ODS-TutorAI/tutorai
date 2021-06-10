@@ -1,76 +1,58 @@
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <HelloWorld msg="Welcome to our Frontend" />
     <div class="container">
       <div class="chat">
         <div class="chat-box">
-          <Message msg="Hi, Elias" right="true"/>
-          <Message msg="Oh! hi" />
-          <div class="chat-r">
-            <div class="sp"></div>
-            <div class="mess mess-r">
-              <p>How are you doing?</p>
-            </div>
-          </div>
-          <div class="chat-l">
-            <div class="mess">
-              <p>I'm doing alright. How about you?</p>
-            </div>
-            <div class="sp"></div>
-          </div>
-
-          <div class="chat-r">
-            <div class="sp"></div>
-            <div class="mess mess-r">
-              <p>Not too bad. The weather is great isn't it?</p>
-            </div>
-          </div>
-
-          <div class="chat-l">
-            <div class="mess">
-              <p>Yes. It's absolutely beautiful today.</p>
-            </div>
-            <div class="sp"></div>
-          </div>
-          <div class="chat-r">
-            <div class="sp"></div>
-            <div class="mess mess-r">
-              <p>I wish it was like this more frequently.</p>
-            </div>
-          </div>
-          <div class="chat-l">
-            <div class="mess">
-              <p>Me too.</p>
-            </div>
-            <div class="sp"></div>
-          </div>
-          <div class="chat-r">
-            <div class="sp"></div>
-            <div class="mess mess-r">
-              <p>So where are you going now?</p>
-            </div>
-          </div>
+          <Message
+            v-for="(item, index) in messages"
+            :key="index"
+            :msg="item.msg"
+            :right="item.right"
+          />
         </div>
 
-        <div class="chat-footer">
-          <textarea placeholder="Type a message"></textarea>
-        </div>
+        <Input v-on:send="sendRequest" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
 import Message from "./components/Message.vue";
+import Input from "./components/Input.vue";
+import axios from "axios";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
-    Message
+    Message,
+    Input,
+  },
+  data() {
+    return {
+      messages: [],
+    };
+  },
+  methods: {
+    sendRequest(message) {
+      this.messages.push({ msg: message, right: "true" });
+      console.log(this.messages);
+      axios({
+        method: "GET",
+        url: "http://localhost:3000/moses/search/german.content",
+        params: {
+          q: message,
+        },
+      }).then(
+        (result) => {
+          this.messages.push({ msg: result, right: "false" });
+          console.log(this.messages);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    },
   },
 };
 </script>
