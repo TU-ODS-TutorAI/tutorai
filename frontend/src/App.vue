@@ -1,60 +1,36 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="chat">
-        <div class="chat-box">
-          <Message
-            v-for="(item, index) in messages"
-            :key="index"
-            :msg="item.msg"
-            :right="item.right"
-          />
-        </div>
-
-        <Input v-on:send="sendRequest" />
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">TutorAI</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link class="nav-link" to="/">Chat</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/admin">Admin</router-link>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
+  </nav>
+  <router-view />
 </template>
 
 <script>
-import Message from "./components/Message.vue";
-import Input from "./components/Input.vue";
-import axios from "axios";
-
 export default {
-  name: "App",
-  components: {
-    Message,
-    Input,
-  },
-  data() {
-    return {
-      messages: [],
-    };
-  },
-  methods: {
-    sendRequest(message) {
-      this.messages.push({ msg: message, right: true });
-      console.log(this.messages);
-      axios({
-        method: "GET",
-        url: "http://localhost:3000/moses/search/german.content",
-        params: {
-          q: message,
-        },
-      }).then(
-        (result) => {
-          this.messages.push({ msg: result, right: false });
-          console.log(this.messages);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    },
-  },
-};
+}
 </script>
 
 <style>
