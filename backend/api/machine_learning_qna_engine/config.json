@@ -1,0 +1,10 @@
+{
+    "ml_config": {
+        "model": "GPT3",
+        "score_toleration": 0.05
+    },
+    "GPT3_config": {
+        "api_key": "API KEY hier einfügen",
+        "max_tokens": 100
+    }
+}
