@@ -1,0 +1,55 @@
+[
+    {
+        "content": {
+            "body": "eins zwei drei vier fuenf sechs sieben",
+            "msgtype": "m.text"
+        },
+        "origin_server_ts": 1623765585876,
+        "sender": "@lionn:matrix.tu-berlin.de",
+        "type": "m.room.message",
+        "unsigned": {
+            "age": 376
+        },
+        "event_id": "$y37lICHp9cgE54ag5DMQgMYUyPANNcVrHKqo723e348",
+        "room_id": "!qQesPBpEHJUVpcJzxG:matrix.org"
+    },{
+        "content": {
+            "body": "eins zwei drei vier fuenf sechs sieben",
+            "msgtype": "m.text"
+        },
+        "origin_server_ts": 1623765585876,
+        "sender": "@lionn:matrix.tu-berlin.de",
+        "type": "m.room.message",
+        "unsigned": {
+            "age": 376
+        },
+        "event_id": "$y37lICHp9cgE54ag5DMQgMYUyPANNcVrHKqo723e348",
+        "room_id": "!qQesPBpEHJUVpcJzxG:matrix.org"
+    },{
+        "content": {
+            "body": "eins zwei drei vier fuenf sechs sieben",
+            "msgtype": "m.text"
+        },
+        "origin_server_ts": 1623765585876,
+        "sender": "@lionn:matrix.tu-berlin.de",
+        "type": "m.room.message",
+        "unsigned": {
+            "age": 376
+        },
+        "event_id": "$y37lICHp9cgE54ag5DMQgMYUyPANNcVrHKqo723e348",
+        "room_id": "!qQesPBpEHJUVpcJzxG:matrix.org"
+    },{
+        "content": {
+            "body": "eins zwei drei vier fuenf sechs sieben",
+            "msgtype": "m.text"
+        },
+        "origin_server_ts": 1623765585876,
+        "sender": "@lionn:matrix.tu-berlin.de",
+        "type": "m.room.message",
+        "unsigned": {
+            "age": 376
+        },
+        "event_id": "$y37lICHp9cgE54ag5DMQgMYUyPANNcVrHKqo723e348",
+        "room_id": "!qQesPBpEHJUVpcJzxG:matrix.org"
+    }
+]
