@@ -5,6 +5,7 @@ import math
 import numpy as np
 import nltk
 from HanTa import HanoverTagger as ht
+import spacy
 
 def score(chars, time):
     chars_sum = chars_for_score(chars)
@@ -89,7 +90,7 @@ class Searchables:                                          #funktioniert moment
 def get_primitive_keywords(message):
     message_without_special_keys = re.sub('[^A-Za-z0-9]+', ' ', message) #das hier wird hier vielleicht nicht gebraucht, bzw. es ist nicht ausgeschlossen dass das hier nicht was kaputt macht
 
-    return keyWordExtraction(message, "german")
+    return keyWordExtraction(message_without_special_keys, "german")
 
     
     message_without_special_keys = re.sub('[^A-Za-z0-9]+', ' ', message)

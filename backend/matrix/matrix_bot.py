@@ -149,10 +149,12 @@ def main():
     bot_handler_called_1 = MRegexHandler("!bot", bot_callback_called)
     bot_handler_called_2 = MRegexHandler("!Bot", bot_callback_called)
     bot_handler_uncalled = MHandler_uncalled(bot_callback_uncalled)
+    bot_handler_volltextsuche = MRegexHandler("!volltextsuche", neo4j_volltextsuche)
 
     bot.add_handler(bot_handler_called_1)
     bot.add_handler(bot_handler_called_2)
     bot.add_handler(bot_handler_uncalled)
+    bot.add_handler(bot_handler_volltextsuche)
 
     bot.start_polling()
     print("bot is ready")
