@@ -11,4 +11,4 @@ def get_msgtype(json):
     return(json["content"]["msgtype"])
 
 def valid_text_msg(json):
-    return (json["type"]== "m.room.message" and json["content"]["msgtype"] == "m.text")
+    return (json["type"]== "m.room.message" and json["content"]["msgtype"] == "m.text" and "m.relates_to" not in json["content"])

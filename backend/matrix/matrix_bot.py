@@ -3,6 +3,10 @@ import re
 import time
 import json
 import requests
+import py2neo
+import spacy
+from py2neo import Graph
+
 import matrix_util.matrix_util as mutil
 import json_util.json_util as jutil
 from urllib.request import urlopen
@@ -12,40 +16,58 @@ from matrix_bot_api.mregex_handler import MRegexHandler
 
 USERNAME = "kleiner_bot" 
 PASSWORD = "MatrixBotPasswort123"  
-SERVER = "https://matrix-client.matrix.org"  
-
+SERVER = "https://matrix-client.matrix.org"
+NEO4JPASSWORD = "TUTORAI"
+neo4j = Graph("bolt://localhost:7687", auth=("neo4j", NEO4JPASSWORD))
 # https://matrix.org/docs/spec/client_server/latest#id43
+
+# wird auf !bot oder !Bot ausgeführt
 def bot_callback_called(room, event):
+
+    #check ob die Nachricht eine Valide Textnachicht ist
     if not mutil.valid_text_msg(event):
         return
 
+    # prints (nicht relevant)
     sender = mutil.get_sender(event)
     body = mutil.get_body(event)
     type = mutil.get_type(event)
     msgtype = mutil.get_msgtype(event)
-    nachricht = body[5:len(body)]
-
+    
     print(body)
     print("cought called msg by " + sender)
     print("type:    " + type)
     print("msgtype: " + msgtype)
 
+    # Bot call wird abgeschnitten
+    nachricht = body[5:len(body)]
+
     if nachricht == '':
         return
     
-    #volltextsuche moses
+    #volltextsuche_moses(room, event)
+    
+    neo4j_suche(room, event)
+
+def volltextsuche_moses(room, event):
+    
+    body = mutil.get_body(event)
+    nachricht = body[5:len(body)]
+
+
+    nachricht = nachricht.replace(" ", "+")
     url = "http://localhost:3000/moses/search/german.content?q="    # pagenotfound
     resp_json = urlopen(url + nachricht)                            # bei mehr wörtern einfach leer durch + ersetzen
-    #response = requests.get('http://localhost:3000/moses/search/german.content', params=)
     resp = json.loads(resp_json.read())
+
 
     resp_to_text = ''
     ct = 0
-    for re in resp:
-        resp_to_text += str(re["german"]["title"])
+    for reg in resp:
+        resp_to_text += str(reg["german"]["title"])
         ct += 1
         if ct > 2:
-            resp_to_text += 'und viele mehr. '
+            resp_to_text += ' und in vielen mehr. Bitte konkretisiere deine Suche etwas.'
             break
         if ct > 1:
             resp_to_text += ', '
@@ -57,17 +79,45 @@ def bot_callback_called(room, event):
     else:
         room.send_text('Ich habe dazu etwas in diesen Modulen gefunden: \n' + resp_to_text)
 
+def neo4j_suche(room, event):
+    # room: raum-objekt der matrix-sdk
+    # event: Json der Nachricht, Format: Siehe json_util.new_message_handling
 
-    return
+    # nachricht ohne das initiale !bot
+    body = mutil.get_body(event)
+    nachricht = body[5:len(body)]
 
     #cyper
-    with driver.session() as session:
-            resp = session.write_transaction(ask_for_modul, nachricht, 1)
+
     
-    room.send_text('Cypher Ergebnis:\n' + resp)
+    room.send_text('Cypher Ergebnis:\n')
 
 
-       
+# wird ausgeführt auch wenn der Bot nicht angesprochen wird
+
+
+def neo4j_volltextsuche(room, event):
+    # room: raum-objekt der matrix-sdk
+    # event: Json der Nachricht, Format: Siehe json_util.new_message_handling
+
+    # nachricht ohne das initiale !bot
+    body = mutil.get_body(event)
+    nachricht = body[14:len(body)]
+    # cyper
+
+    room.send_text('Hi: ' + nachricht)
+
+    nlp = spacy.load("de_core_news_lg")
+    doc = nlp(nachricht)
+    # for token in doc:
+        # todo
+        # neo4j.run()
+
+
+
+
+# wird ausgeführt auch wenn der Bot nicht angesprochen wird
+
 def bot_callback_uncalled(room, event):
     if not mutil.valid_text_msg(event):
         return
@@ -86,13 +136,15 @@ def bot_callback_uncalled(room, event):
         print('not saved')
         return
 
-    jutil.json_do_your_thing(event, room)
+    jutil.new_message_handling(event, room)
 
     return
 
 
+# Event_Handlers und Main Thread
 def main():
     bot = MatrixBotAPI(USERNAME, PASSWORD, SERVER)
+
 
     bot_handler_called_1 = MRegexHandler("!bot", bot_callback_called)
     bot_handler_called_2 = MRegexHandler("!Bot", bot_callback_called)

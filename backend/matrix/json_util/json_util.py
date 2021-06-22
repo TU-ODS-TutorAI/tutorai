@@ -39,27 +39,10 @@ def get_room_id(json):
      return(json["room_id"])
 def get_event_id(json): 
      return(json["event_id"])
-def get_html_msg(event):
-    jevent = json.loads(event)
 
-    pref0 = '<mx-reply><blockquote><a href=\"https://chat.tu-berlin.de/#/room/'         
-    roomid = get_room_id(jevent)
-    pref1 = '/'
-    eventid = get_event_id(jevent)
-    pref2 = '?via=matrix.org&via=matrix.tu-berlin.de\"></a><a href=\"https://chat.tu-berlin.de/#/user/' #hier mlg. dynamisch homeserver des users einsetzen
-    user = get_sender(jevent)
-    pref3 = '\">'
-    user2 = user
-    pref4 = '</a><br>'
-    nachricht = get_body(jevent)
-    pref5 = '</blockquote></mx-reply>'
-    response = 'vielleicht hilft das'
-
-    html_msg = pref0 + roomid + pref1 + eventid + pref2 + user + pref3 + user2 + pref4 + nachricht + pref5 + response
-
-    #resonse to in der json funktioniert nicht
-
-    return html_msg
+#oben: nützliche Funktionen
+#################################################################
+#unten: nur für klassischen Ansatz relevant
 
 
 class Searchables:                                          #funktioniert momentan nur für einen Raum, da alle nachrichten zusammen gespeichert werden
@@ -103,8 +86,72 @@ class Searchables:                                          #funktioniert moment
 
         return findings
 
-# das hier ist quasi die Main
-def json_do_your_thing(event, room):
+def get_primitive_keywords(message):
+    message_without_special_keys = re.sub('[^A-Za-z0-9]+', ' ', message) #das hier wird hier vielleicht nicht gebraucht, bzw. es ist nicht ausgeschlossen dass das hier nicht was kaputt macht
+
+    return keyWordExtraction(message, "german")
+
+    
+    message_without_special_keys = re.sub('[^A-Za-z0-9]+', ' ', message)
+    words_as_array = re.sub('[^\w]', ' ', message_without_special_keys).split()
+    return get_usefull_primitive_keywords(words_as_array)
+
+def get_usefull_primitive_keywords(keywords):
+    usefprimkw = []
+
+    for word in keywords:
+        if(len(word) > 5):
+            usefprimkw.append(word.lower())
+
+    return usefprimkw
+
+def keyWordExtraction(user_question: str, language):
+    words = nltk.word_tokenize(user_question, language=language)
+    
+    key_words = []
+    if(language == "german"):
+        tagger = ht.HanoverTagger('morphmodel_ger.pgz')
+        tagged = tagger.tag_sent(words, taglevel=1)
+        
+        for tag in tagged:
+            if(tag[2] == "NN" or tag[2] == "NE"):
+                key_words.append(tag[0].lower())    #hier noch das lowercase keyword angefügt
+    elif(language == "english"):
+        tagger = nltk.pos_tag(words)
+        
+        for tag in tagger:
+            if(tag[1].startswith("NN") or tag[1].startswith("VB") or tag[1].startswith("JJ")):
+               key_words.append(tag[0])
+    else:
+        print("language not supported")
+        exit(2)
+    
+    return key_words
+
+def entf_suffix(usefprimkw):
+    suffixfreie_usefprimkw = []
+    
+    for word in usefprimkw:
+        suffixfreie_usefprimkw.append(word[:])    #nutzlos, so wie ich mir das vorstelle
+
+    return suffixfreie_usefprimkw
+
+def hashing_suffrusefprimkw(suffixfreie_usefprimkw):
+    hashes = []
+
+    for word in suffixfreie_usefprimkw:
+        hash = 0
+        for ind in range(0, len(word)):
+            if ind%2 == 1:
+                hash += 2*ord(word[ind])
+            else:
+                hash += ord(word[ind])
+            ind += 1
+        hashes.append(hash)
+
+    return hashes
+
+def json_do_your_thing(event, room):        #klassische Keywordsuche, Speicherung in Liste und Keywordsuche durch Hashes
     if not valid_text_msg(event):
         return
 
@@ -117,9 +164,22 @@ def json_do_your_thing(event, room):
     if primkw == []:
         return
 
-    suffixfreie_usefprimkw = entf_suffix(primkw)
+    # primkw ist liste der nomen und eigennamen
+    # an dieser Stelle lemma einfügen
 
-    hash_suffrusefprimkw = hashing_suffrusefprimkw(suffixfreie_usefprimkw)
+    nlp = spacy.load("de_core_news_lg")
+
+    suffixfreie_usefprimkw = []
+    hash_suffrusefprimkw = []
+    for keyw in primkw:
+        doc = nlp(keyw)
+        for token in doc:
+            suffixfreie_usefprimkw.append(token.lemma_)
+            hash_suffrusefprimkw.append(token.lemma)
+            print(token.lemma_)
+
+    #suffixfreie_usefprimkw = entf_suffix(primkw)
+    #hash_suffrusefprimkw = hashing_suffrusefprimkw(suffixfreie_usefprimkw)
     exisiting_words = searchables.return_exisiting_words(hash_suffrusefprimkw)
 
     if exisiting_words != [[], [], []]:
@@ -148,97 +208,48 @@ def json_do_your_thing(event, room):
         print("best: ", best)
 
         if score_old > 2:
-            send_message(room, exisiting_words[0][best], exisiting_words[1][best], exisiting_words[2][best])
+            send_message(room, exisiting_words[2][best])
 
     # neue Nachricht abspeichern
     searchables.add_to(suffixfreie_usefprimkw, hash_suffrusefprimkw, json.dumps(event))
 
 
-def get_primitive_keywords(message):
-    message_without_special_keys = re.sub('[^A-Za-z0-9]+', ' ', message) #das hier wird hier vielleicht nicht gebraucht, bzw. es ist nicht ausgeschlossen dass das hier nicht was kaputt macht
 
-    return keyWordExtraction(message, "german")
+#oben: nur für klassischen Ansatz relevant
+#################################################################
+#unten: vollständige Schnittstelle zum Matrixchat inkl. Funktionen für I/O
 
-    
-    message_without_special_keys = re.sub('[^A-Za-z0-9]+', ' ', message)
-    words_as_array = re.sub('[^\w]', ' ', message_without_special_keys).split()
-    return get_usefull_primitive_keywords(words_as_array)
+def new_message_handling(event, room):
+    """
+        event: empfangene Json der Form     {
+                                                "content": {
+                                                    "body": "trauben",
+                                                    "msgtype": "m.text"
+                                                },
+                                                "origin_server_ts": 1624286301820,
+                                                "sender": "@lionn:matrix.tu-berlin.de",
+                                                "type": "m.room.message",
+                                                "unsigned": {
+                                                    "age": 947
+                                                },
+                                                "event_id": "$8sDT1_34_V5tmb-fhnz-pw-RJthTCkqqW68jaSf20uM",
+                                                "room_id": "!qQesPBpEHJUVpcJzxG:matrix.org"
+                                            } 
+        room: raumobjekt der matrix sdk, mit der eine Schnittstelle zur Vollständigen Funktionalität der Matrix sdk gewährleistet wird
+    """
 
+    #klassischer Ansatz für die Datenverarbeitung; Probleme sind u.a. skaliert nur bedingt, da Nachrichten zur Keywordsuche nur temporär gespeichert werden
+    json_do_your_thing(event, room)
 
-def get_usefull_primitive_keywords(keywords):
-    usefprimkw = []
+    # hier kann weitere Funktionalität angebunden werden
+    # mit send_message(room, "json der zu referenzierenden Nachricht") kann auf eine Nachricht referenziert werden
+    # mit room.send_text("hier der zu sendende Text") kann Text direkt in den Raum geschickt werden
 
-    for word in keywords:
-        if(len(word) > 5):
-            usefprimkw.append(word.lower())
-
-    return usefprimkw
-
-
-def keyWordExtraction(user_question: str, language):
-    words = nltk.word_tokenize(user_question, language=language)
-    
-    key_words = []
-    if(language == "german"):
-        tagger = ht.HanoverTagger('morphmodel_ger.pgz')
-        tagged = tagger.tag_sent(words, taglevel=1)
-        
-        for tag in tagged:
-            if(tag[2] == "NN" or tag[2] == "NE"):
-                key_words.append(tag[0].lower())    #hier noch das lowercase keyword angefügt
-    elif(language == "english"):
-        tagger = nltk.pos_tag(words)
-        
-        for tag in tagger:
-            if(tag[1].startswith("NN") or tag[1].startswith("VB") or tag[1].startswith("JJ")):
-               key_words.append(tag[0])
-    else:
-        print("language not supported")
-        exit(2)
-    
-    return key_words
+def send_message(room, event, msgtype="m.text"):
+    # room: Matrix-Raum-Objekt
+    # event: zu referenzierende Nachricht als json Obket der Form die in new_event_handling gezeigt ist
 
 
-def entf_suffix(usefprimkw):
-    suffixfreie_usefprimkw = []
-    
-    for word in usefprimkw:
-        suffixfreie_usefprimkw.append(word[:])    #nutzlos, so wie ich mir das vorstelle
-
-    return suffixfreie_usefprimkw
-
-
-def hashing_suffrusefprimkw(suffixfreie_usefprimkw):
-    hashes = []
-
-    for word in suffixfreie_usefprimkw:
-        hash = 0
-        for ind in range(0, len(word)):
-            if ind%2 == 1:
-                hash += 2*ord(word[ind])
-            else:
-                hash += ord(word[ind])
-            ind += 1
-        hashes.append(hash)
-
-    return hashes
-
-
-def get_html_content(room, html, event_id, body=None, msgtype="m.text"):
-        return {
-            "body": body if body else re.sub('<[^<]+?>', '', html),
-            "msgtype": msgtype,
-            "format": "org.matrix.custom.html",
-            "formatted_body": html,
-            "m.relates_to": {
-                "m.in_reply_to": {
-                    "event_id": event_id
-                }
-            },
-        }
-
-
-def send_message(room, word, index, event, msgtype="m.text"):
     jevent = json.loads(event)
     html_msg = get_html_msg(event)
     event_id = get_event_id(jevent)
@@ -256,3 +267,38 @@ def send_message(room, word, index, event, msgtype="m.text"):
 
     #https://github.com/matrix-org/matrix-python-sdk/blob/master/matrix_client/room.py
     #https://github.com/matrix-org/matrix-python-sdk/blob/master/matrix_client/api.py
+
+def get_html_content(room, html, event_id, body=None, msgtype="m.text"):
+        return {
+            "body": body if body else re.sub('<[^<]+?>', '', html),
+            "msgtype": msgtype,
+            "format": "org.matrix.custom.html",
+            "formatted_body": html,
+            "m.relates_to": {
+                "m.in_reply_to": {
+                    "event_id": event_id
+                }
+            },
+        }
+
+def get_html_msg(event):
+    jevent = json.loads(event)
+
+    pref0 = '<mx-reply><blockquote><a href=\"https://chat.tu-berlin.de/#/room/'         
+    roomid = get_room_id(jevent)
+    pref1 = '/'
+    eventid = get_event_id(jevent)
+    pref2 = '?via=matrix.org&via=matrix.tu-berlin.de\"></a><a href=\"https://chat.tu-berlin.de/#/user/' #hier mlg. dynamisch homeserver des users einsetzen
+    user = get_sender(jevent)
+    pref3 = '\">'
+    user2 = user
+    pref4 = '</a><br>'
+    nachricht = get_body(jevent)
+    pref5 = '</blockquote></mx-reply>'
+    response = 'vielleicht hilft das'
+
+    html_msg = pref0 + roomid + pref1 + eventid + pref2 + user + pref3 + user2 + pref4 + nachricht + pref5 + response
+
+    #resonse to in der json funktioniert nicht
+
+    return html_msg
