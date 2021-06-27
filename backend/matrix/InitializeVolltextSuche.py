@@ -15,6 +15,8 @@ if __name__ == '__main__':
             # print(data["m"])
             # print(data["labels(m)"][0])
             """
+            reihen reihen 12381519186764585653 VERB VVFIN cj xxxx True False [unendliche, ,]
+            Reihen Reihe 15981145232003321657 NOUN NN cj Xxxxx True False [unendliche, ,, Potenzreihen, ,]
             str_data = str(data["m"])
             str_data_arr = str_data.split(':')
             str_data = str_data_arr[1]
@@ -31,14 +33,14 @@ if __name__ == '__main__':
 
             # print(data["m"])
             for token in output:
-                if not data["m"]["Modulnummer"]:
-                    for moduleName in neo4j.run("match (m:`%s` {name:'%s'})--(a:Modul) return a.name"
-                                                % (data["labels(m)"][0], data["m"]["name"])).data():
-                        # print(moduleName["a.name"])
-                        neo4j.run("merge (t:volltext {lemma:'%s'}) "
-                                  "merge(m:Modul {name:'%s'}) "
-                                  "merge(t)-[rel:GEHÖRT_ZU]->(m)" % (token.lemma,moduleName["a.name"]))
-                else:
-                    neo4j.run("merge (t:volltext {lemma:'%s'}) "
-                              "merge(m:Modul {name:'%s'}) "
-                              "merge(t)-[rel:GEHÖRT_ZU]->(m)" % (token.lemma, data["m"]["name"]))
+                if token.pos_ != "PUNCT" and token.pos_ != "SPACE":
+                    print(token.text.lower())
+                    if data["labels(m)"][0] != "Modul":
+                        for moduleName in neo4j.run(f"match (m:`{data['labels(m)'][0]}` {{name:'{data['m']['name']}'}})--(a:Modul) return a.name").data():
+                            neo4j.run(f"merge (t:volltext {{lemma:'{token.lemma}', text:'{token.text.lower()}'}}) "
+                                      f"merge(m:Modul {{name:'{moduleName['a.name']}'}}) "
+                                      "merge(t)-[rel:GEHÖRT_ZU]->(m)")
+                    else:
+                        neo4j.run(f"merge (t:volltext {{lemma:'{token.lemma}', text:'{token.text.lower()}'}}) "
+                                  f"merge(m:Modul {{name:'{data['m']['name']}'}}) "
+                                  "merge(t)-[rel:GEHÖRT_ZU]->(m)")

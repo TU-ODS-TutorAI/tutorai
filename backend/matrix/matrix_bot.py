@@ -109,14 +109,28 @@ def neo4j_volltextsuche(room, event):
 
     nlp = spacy.load("de_core_news_lg")
     doc = nlp(nachricht)
-    # for token in doc:
-        # todo
-        # neo4j.run()
+    searchresults = []
+    for token in doc:
+        if token.pos_ != "PUNCT" and token.pos_ != "SPACE":
+            for name in neo4j.run(f"match (v:volltext {{lemma:'{token.lemma}'}})-[:`GEHÖRT_ZU`]-(a) return a.name").data():
+                if str(name["a.name"]) not in searchresults:
+                    searchresults.append(name["a.name"])
+            for name in neo4j.run(f"match (v:volltext {{text:'{token.text.lower()}'}})-[:`GEHÖRT_ZU`]-(b) return b.name").data():
+                if str(name["b.name"]) not in searchresults:
+                    searchresults.append(name["b.name"])
+
+    if len(searchresults) == 0:
+        room.send_text('Leider war die Suche Erfolglos')
+    elif len(searchresults) < 2:
+        room.send_text('Ich habe dazu etwas in diesem Modul gefunden: ' + ', '.join(searchresults))
+    else:
+        room.send_text('Ich habe dazu etwas in diesen Modulen gefunden: \n' + ', '.join(searchresults))
 
 
 
 
-# wird ausgeführt auch wenn der Bot nicht angesprochen wird
+
+        # wird ausgeführt auch wenn der Bot nicht angesprochen wird
 
 def bot_callback_uncalled(room, event):
     if not mutil.valid_text_msg(event):

@@ -16,8 +16,9 @@ if __name__ == '__main__':
               "* Studierende können Beweise zur Korrektheit von Programmen nachvollziehen und einfachere Beweise selbst führen."
               "* Studierende sind mit den Stärken und Schwächen von einfacheren und fortgeschritteneren Sortieralgorithmen vertraut und können mit diesem Wissen die Wahl eines geeigneten Sortieralgorithmus begründen.")
     for token in doc:
-        print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_,
+        print(token.text, token.lemma_, token.lemma, token.pos_, token.tag_, token.dep_,
               token.shape_, token.is_alpha, token.is_stop, [child for child in token.children])
+        print(f"match (v:volltext {{lemma:\"{token.lemma}\"}})-[:`GEHÖRT_ZU`]-(a) return a.name")
     #displacy.serve(doc, style="dep")
 
     
