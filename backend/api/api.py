@@ -1,11 +1,13 @@
 import flask
 import json
 from flask import jsonify
+from flask_cors import CORS
 
-from backend.api import machine_learning_qna_engine
-from backend.api import classic_qna_engine
+import machine_learning_qna_engine
+import classic_qna_engine
 
 app = flask.Flask(__name__)
+cors = CORS(app)
 app.config["DEBUG"] = True
 
 with open("config.json") as json_data_file:
