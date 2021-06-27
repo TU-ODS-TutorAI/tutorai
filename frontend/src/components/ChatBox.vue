@@ -1,18 +1,16 @@
 <template>
   <div>
-    <div class="container">
-      <div class="chat">
-        <div class="chat-box">
-          <Message
-            v-for="(item, index) in messages"
-            :key="index"
-            :msg="item.msg"
-            :right="item.right"
-          />
-        </div>
-
-        <Input v-on:send="sendRequest" />
+    <div class="container chat">
+      <div class="chat-box">
+        <Message
+          v-for="(item, index) in messages"
+          :key="index"
+          :msg="item.msg"
+          :right="item.right"
+        />
       </div>
+
+      <Input v-on:send="sendRequest" />
     </div>
   </div>
 </template>
@@ -57,5 +55,4 @@ export default {
 </script>
 
 <style>
-
 </style>
