@@ -36,10 +36,7 @@ export default {
       console.log(this.messages);
       axios({
         method: "GET",
-        url: "http://localhost:3000/moses/search/german.content",
-        params: {
-          q: message,
-        },
+        url: `http://localhost:5000/tutorai/classic/${message}/40017`,
       }).then(
         (result) => {
           this.messages.push({ msg: result, right: false });
