@@ -19,6 +19,7 @@ PASSWORD = "MatrixBotPasswort123"
 SERVER = "https://matrix-client.matrix.org"
 NEO4JPASSWORD = "TUTORAI"
 neo4j = Graph("bolt://localhost:7687", auth=("neo4j", NEO4JPASSWORD))
+nlp = spacy.load("de_core_news_lg")
 # https://matrix.org/docs/spec/client_server/latest#id43
 
 # wird auf !bot oder !Bot ausgeführt
@@ -100,10 +101,13 @@ def neo4j_volltextsuche(room, event):
     # room: raum-objekt der matrix-sdk
     # event: Json der Nachricht, Format: Siehe json_util.new_message_handling
 
+    print("neo4j Volltext")
+
     # nachricht ohne das initiale !bot
     body = mutil.get_body(event)
-    nachricht = body[14:len(body)]
+    nachricht = body[9:len(body)]
     # cyper
+
 
     room.send_text('Hi: ' + nachricht)
 
@@ -141,16 +145,16 @@ def bot_callback_uncalled(room, event):
     type = mutil.get_type(event)
     msgtype = mutil.get_msgtype(event)
 
+    if body[0] == '!':
+        print('not saved')
+        return
+
     print(body)
     print("cought uncalled msg by " + sender)
     print("type:    " + type)
     print("msgtype: " + msgtype)
 
-    if body[0] == '!':
-        print('not saved')
-        return
-
-    jutil.new_message_handling(event, room)
+    jutil.new_message_handling(event, room, neo4j, nlp)
 
     return
 
@@ -163,7 +167,7 @@ def main():
     bot_handler_called_1 = MRegexHandler("!bot", bot_callback_called)
     bot_handler_called_2 = MRegexHandler("!Bot", bot_callback_called)
     bot_handler_uncalled = MHandler_uncalled(bot_callback_uncalled)
-    bot_handler_volltextsuche = MRegexHandler("!volltextsuche", neo4j_volltextsuche)
+    bot_handler_volltextsuche = MRegexHandler("!volltext", neo4j_volltextsuche)
 
     bot.add_handler(bot_handler_called_1)
     bot.add_handler(bot_handler_called_2)
@@ -180,4 +184,18 @@ def main():
 if __name__ == "__main__":
     main()
 
-
+# TODO:
+#
+# 1
+# !predefined
+# can be used with every course
+# !help
+# !klausur
+# !tutorien
+# !kontakt
+#
+# 1
+# learn from chat
+#
+# 2
+# provide api that does not use matrix (http?)

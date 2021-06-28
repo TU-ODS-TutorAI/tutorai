@@ -212,6 +212,7 @@ def json_do_your_thing(event, room):        #klassische Keywordsuche, Speicherun
 
         if score_old > 2:
             send_message(room, exisiting_words[2][best])
+            print(exisiting_words[2][best])
 
     # neue Nachricht abspeichern
     searchables.add_to(suffixfreie_usefprimkw, hash_suffrusefprimkw, json.dumps(event))
@@ -237,12 +238,106 @@ def new_message_handling(event, room, neo4j, nlp):
                                                 },
                                                 "event_id": "$8sDT1_34_V5tmb-fhnz-pw-RJthTCkqqW68jaSf20uM",
                                                 "room_id": "!qQesPBpEHJUVpcJzxG:matrix.org"
-                                            } 
+                                            }
         room: raumobjekt der matrix sdk, mit der eine Schnittstelle zur Vollständigen Funktionalität der Matrix sdk gewährleistet wird
     """
 
     #klassischer Ansatz für die Datenverarbeitung; Probleme sind u.a. skaliert nur bedingt, da Nachrichten zur Keywordsuche nur temporär gespeichert werden
-    json_do_your_thing(event, room)
+    ##json_do_your_thing(event, room)
+
+    #save message in neo4j
+    nachricht = get_body(event)
+    event["content"]["body"] = "hi"
+    nachricht = re.sub('[^A-Za-z0-9]+', ' ', nachricht)
+    zeit = get_time_stamp(event)
+
+    #nachricht wird in Nomen und Eigennamen Zerlegt
+    """
+    keyWords =  keyWordExtraction(nachricht, "german")
+    nachricht = ""
+    for word in keyWords:
+        nachricht += word
+        nachricht += " "
+    """
+
+    #print(json.dumps(event))
+    #ev = neo4j.run(f"match (c:chat {{text:'{nachricht}'}})-[:EVENT]->(j) return j.string").data()
+
+    stringnlp = nlp(nachricht)
+    print(stringnlp)
+
+    best = 0
+    responsebest = "Not found"
+    for query in neo4j.run("match (c:chat) return c.text").data():
+        #spacy
+        # Vergleich der Nachricht mit den Nachrichtden der Datenbank
+        querynlp = nlp(query['c.text'])
+
+        #hier besseren Algorithmus zum Vergleich einfügen
+        tmp = stringnlp.similarity(querynlp) #Vergleichsscore
+
+        if tmp > best:
+            print("got a winner")
+            for response in neo4j.run(
+                    f"match (c:chat {{text:'{query['c.text']}'}})-[:EVENT]->(j) return j.string").data():
+                responsebest = response['j.string']
+                best = tmp
+
+    # responsebest soll hier das Json-event der am Besten passenden Nachricht enthalten
+    if responsebest != "Not found":
+        room.send_text("Mit einem Score von " + str(best) + " wurde mit SpaCy folgendes gefunden")
+        send_message(room, responsebest)
+
+
+
+# sequence matching
+
+    # vergleichsscore kommt in tmp rein
+
+    nachrichten = keyWordExtraction(nachricht, "german")
+    nachricht = ""
+    leng = 0
+    for n in nachrichten:
+        nachricht += n
+        nachricht += " "
+        leng += len(n)
+
+    best = 0
+    responsebest = "Not found"
+    for query in neo4j.run("match (c:chat) return c.text").data():
+
+        string1 = nachricht.lower()
+        string2 = query['c.text'].lower()
+
+
+
+        # Vergleichsscore
+        tmp = difflib.SequenceMatcher(None, string1, string2)
+        #score = tmp.ratio()
+        liste = tmp.get_matching_blocks()
+        sum = 0
+        for lis in liste:
+            sum += lis[2]
+
+        score = sum/leng
+
+
+
+        if score > best:
+            print("got a winner")
+            for response in neo4j.run(f"match (c:chat {{text:'{query['c.text']}'}})-[:EVENT]->(j) return j.string").data():
+                responsebest = response['j.string']
+                best = score
+
+    # Einfügen der neuen Nachricht in den Graphen
+    neo4j.run(f"create (c:chat {{text:'{nachricht}', time:'{zeit}'}})-[:EVENT]->(j:json {{string:'{json.dumps(event)}'}})")
+    # responsebest soll hier das Json-event der am Besten passenden Nachricht enthalten
+    if responsebest != "Not found":
+        room.send_text("Mit einem Score von " + str(best) + " wurde mit Sequence-Matching folgendes gefunden")
+        send_message(room, responsebest)
+
+
+
 
     # hier kann weitere Funktionalität angebunden werden
     # mit send_message(room, "json der zu referenzierenden Nachricht") kann auf eine Nachricht referenziert werden
