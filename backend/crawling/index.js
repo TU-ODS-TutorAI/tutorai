@@ -67,6 +67,11 @@ const MosesModule = mongoose.model('MosesModule', new mongoose.Schema({
     }
 }))
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 let modules
 https(config.resources.moses.getLinkToAllModules(), (data) => { modules = Module.getModules(data) })
