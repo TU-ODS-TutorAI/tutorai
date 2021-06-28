@@ -116,8 +116,9 @@ def keyWordExtraction(user_question: str, language):
         tagged = tagger.tag_sent(words, taglevel=1)
         
         for tag in tagged:
-            if(tag[2] == "NN" or tag[2] == "NE"):
-                key_words.append(tag[0].lower())    #hier noch das lowercase keyword angefügt
+            if(tag[2] == "NN" or tag[2] == "NE" or tag[2].startswith("V") or tag[2].startswith("AD")):
+            #if (tag[2] == "NN" or tag[2] == "NE"):
+                key_words.append(tag[0])    #hier noch das lowercase keyword angefügt
     elif(language == "english"):
         tagger = nltk.pos_tag(words)
         
@@ -221,7 +222,7 @@ def json_do_your_thing(event, room):        #klassische Keywordsuche, Speicherun
 #################################################################
 #unten: vollständige Schnittstelle zum Matrixchat inkl. Funktionen für I/O
 
-def new_message_handling(event, room):
+def new_message_handling(event, room, neo4j, nlp):
     """
         event: empfangene Json der Form     {
                                                 "content": {
@@ -304,3 +305,4 @@ def get_html_msg(event):
     #resonse to in der json funktioniert nicht
 
     return html_msg
+
