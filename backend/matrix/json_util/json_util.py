@@ -1,3 +1,4 @@
+import difflib
 import json
 from os import supports_effective_ids
 import re
