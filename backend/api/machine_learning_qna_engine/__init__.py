@@ -3,9 +3,6 @@ from transformers import pipeline
 import openai
 import os
 
-DEFAULT_ANSWER = "Sorry, I´m not sure"
-SCORE_TOLERATION = 0.05
-
 
 def get_config_file():
     global config
@@ -14,8 +11,6 @@ def get_config_file():
     relative_path_to_config_file = os.path.relpath(path_to_config_file)
     with open(relative_path_to_config_file) as json_config_file:
         config = json.load(json_config_file)
-        print("Halllooooo:  ")
-        print(config)
 
 
 get_config_file()
@@ -42,7 +37,7 @@ def bert_question_answerer(question, context):
     response = question_answerer(payload)
 
     if response["score"] < config["ml_config"]["score_toleration"]:
-        return DEFAULT_ANSWER
+        return config["ml_config"]["default_answer"]
     else:
         return response["answer"]
 

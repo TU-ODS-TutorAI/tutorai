@@ -1,5 +1,6 @@
 {
     "ml_config": {
+        "default_answer": "Sorry, I´m not sure",
         "model": "GPT3",
         "score_toleration": 0.05
     },
