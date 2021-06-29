@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container chat">
-      <select v-model="selected">
+      <select class="form-select" v-model="selected">
         <option disabled value="">Please Select the Module Context</option>
         <option
           v-for="(item, index) in modules"

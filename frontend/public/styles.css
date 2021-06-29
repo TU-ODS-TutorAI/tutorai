@@ -94,7 +94,7 @@
 	position: relative;
 	cursor: pointer;
 }
-.chat-footer textarea {
+.chat-footer input {
 	display: block;
 	flex: 1;
 	width: 100%;
