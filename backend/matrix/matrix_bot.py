@@ -202,17 +202,11 @@ if __name__ == "__main__":
     main()
 
 # TODO:
-#
-# 1
-# !predefined
-# can be used with every course
-# !help
-# !klausur
-# !tutorien
-# !kontakt
-#
 # 1
 # learn from chat
+#
+# 1
+# have preset handlers do more than text
 #
 # 2
 # provide api that does not use matrix (http?)
