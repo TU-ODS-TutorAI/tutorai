@@ -144,8 +144,8 @@ def keyWordExtraction(user_question: str, language):
         tagged = tagger.tag_sent(words, taglevel=1)
 
         for tag in tagged:
-            if (tag[2] == "NN" or tag[2] == "NE" or tag[2].startswith("V") or tag[2].startswith("AD")):
-                # if (tag[2] == "NN" or tag[2] == "NE"):
+            #if (tag[2] == "NN" or tag[2] == "NE" or tag[2].startswith("V") or tag[2].startswith("AD")):
+            if (tag[2] == "NN" or tag[2] == "NE"):
                 key_words.append(tag[0])  # hier noch das lowercase keyword angefügt
     elif (language == "english"):
         tagger = nltk.pos_tag(words)
@@ -254,7 +254,7 @@ def json_do_your_thing(event, room):  # klassische Keywordsuche, Speicherung in 
 #################################################################
 # unten: vollständige Schnittstelle zum Matrixchat inkl. Funktionen für I/O
 
-def new_message_handling(event, room, neo4j, nlp):
+async def new_message_handling(bot, message, room, neo4j, nlp):
     """
         event: empfangene Json der Form     {
                                                 "content": {
@@ -298,10 +298,9 @@ def new_message_handling(event, room, neo4j, nlp):
 
 
     # save message in neo4j
-    nachricht = get_body(event)
-    event["content"]["body"] = "hi"
+    nachricht = message.body
+    message.body = "hi"
     nachricht = re.sub('[^A-Za-z0-9]+', ' ', nachricht)
-    zeit = get_time_stamp(event)
 
     # nachricht wird in Nomen und Eigennamen Zerlegt
     """
@@ -347,7 +346,7 @@ def new_message_handling(event, room, neo4j, nlp):
 
     nachrichten = keyWordExtraction(nachricht, "german")
     nachricht = ""
-    leng = 0
+    leng = 1
     for n in nachrichten:
         nachricht += n
         nachricht += " "
@@ -357,8 +356,13 @@ def new_message_handling(event, room, neo4j, nlp):
     responsebest = "Not found"
     for query in neo4j.run("match (c:chat) return c.text").data():
 
-        string1 = nachricht.lower()
-        string2 = query['c.text'].lower()
+        string1 = nachricht
+        string2 = query['c.text']
+        string3 = keyWordExtraction(string2, "german")
+        string2 = ""
+        for n in string3:
+            string2 += n
+            string2 += " "
 
         # Vergleichsscore
         tmp = difflib.SequenceMatcher(None, string1, string2)
@@ -366,7 +370,9 @@ def new_message_handling(event, room, neo4j, nlp):
         liste = tmp.get_matching_blocks()
         sum = 0
         for lis in liste:
-            sum += lis[2]
+            print(lis)
+            if lis[2] > 3:
+                sum += lis[2]
 
         score = sum / leng
 

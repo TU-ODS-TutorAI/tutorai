@@ -41,9 +41,15 @@ async def volltextsuche_moses(room, message):
     ct = 0
     for reg in resp:
         resp_to_text += str(reg["german"]["title"])
+        resp_to_text += ": " + "https://moseskonto.tu-berlin.de/moses/modultransfersystem/bolognamodule/beschreibung/anzeigen.html?nummer="
+        resp_to_text += str(reg["number"])
+        resp_to_text += "&version="
+        resp_to_text += str(reg["version"])
+        resp_to_text += "&sprache=1\n"
+
         ct += 1
         if ct > 2:
-            resp_to_text += ' und in vielen mehr. Bitte konkretisiere deine Suche etwas.'
+            resp_to_text += '...\n\n und in vielen mehr. Bitte konkretisiere deine Suche etwas.'
             break
         if ct > 1:
             resp_to_text += ', '
@@ -87,27 +93,8 @@ async def neo4j_volltextsuche(room, message):
 
 
 # wird ausgeführt auch wenn der Bot nicht angesprochen wird
-def bot_callback_uncalled(room, event):
-    if not mutil.valid_text_msg(event):
-        return
-
-    sender = mutil.get_sender(event)
-    body = mutil.get_body(event)
-    type = mutil.get_type(event)
-    msgtype = mutil.get_msgtype(event)
-
-    if body[0] == '!':
-        print('not saved')
-        return
-
-    print(body)
-    print("cought uncalled msg by " + sender)
-    print("type:    " + type)
-    print("msgtype: " + msgtype)
-
-    jutil.new_message_handling(event, room, neo4j, nlp)
-
-    return
+async def bot_callback_uncalled(room, event):
+    await jutil.new_message_handling(bot, event, room, neo4j, nlp)
 
 
 # Handles an isis search
