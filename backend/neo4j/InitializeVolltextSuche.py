@@ -12,7 +12,6 @@ if __name__ == '__main__':
             output = nlp(data["m"][data1])
             for token in output:
                 if token.pos_ != "PUNCT" and token.pos_ != "SPACE":
-                    print(token.text.lower())
                     if data["labels(m)"][0] != "Modul":
                         for moduleName in neo4j.run(f"match (m:`{data['labels(m)'][0]}` {{name:'{data['m']['name']}'}})--(a:Modul) return a.name").data():
                             neo4j.run(f"merge (t:volltext {{lemma:'{token.lemma}', text:'{token.text.lower()}'}}) "
