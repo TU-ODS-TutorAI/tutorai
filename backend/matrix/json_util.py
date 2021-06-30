@@ -7,6 +7,7 @@ import numpy as np
 import nltk
 from HanTa import HanoverTagger as ht
 import spacy
+import matrix_util.matrix_util as mutil
 
 
 def score(chars, time):
@@ -270,10 +271,31 @@ def new_message_handling(event, room, neo4j, nlp):
                                                 "room_id": "!qQesPBpEHJUVpcJzxG:matrix.org"
                                             }
         room: raumobjekt der matrix sdk, mit der eine Schnittstelle zur Vollständigen Funktionalität der Matrix sdk gewährleistet wird
+    Attributes:
+        source (dict): The source dictionary of the event. This allows access
+            to all the event fields in a non-secure way.
+        event_id (str): A globally unique event identifier.
+        sender (str): The fully-qualified ID of the user who sent this
+            event.
+        server_timestamp (int): Timestamp in milliseconds on originating
+            homeserver when this event was sent.
+        decrypted (bool): A flag signaling if the event was decrypted.
+        verified (bool): A flag signaling if the event is verified, is True if
+            the event was sent from a verified device.
+        sender_key (str, optional): The public key of the sender that was used
+            to establish the encrypted session. Is only set if decrypted is
+            True, otherwise None.
+        session_id (str, optional): The unique identifier of the session that
+            was used to decrypt the message. Is only set if decrypted is True,
+            otherwise None.
+        transaction_id (str, optional): The unique identifier that was used
+            when the message was sent. Is only set if the message was sent from
+            our own device, otherwise None.
     """
 
     # klassischer Ansatz für die Datenverarbeitung; Probleme sind u.a. skaliert nur bedingt, da Nachrichten zur
     # Keywordsuche nur temporär gespeichert werden json_do_your_thing(event, room)
+
 
     # save message in neo4j
     nachricht = get_body(event)
@@ -309,14 +331,15 @@ def new_message_handling(event, room, neo4j, nlp):
         if tmp > best:
             print("got a winner")
             for response in neo4j.run(
-                    f"match (c:chat {{text:'{query['c.text']}'}})-[:EVENT]->(j) return j.string").data():
-                responsebest = response['j.string']
+                    f"match (c:chat {{text:'{query['c.text']}'}})-[:EVENT]->(j) return j.eventId, j.timestamp").data():
+                responsebest = query['c.text']
+                responseevent = response['j.eventId']
+                reponsetime = response['j.timestamp']
                 best = tmp
 
     # responsebest soll hier das Json-event der am Besten passenden Nachricht enthalten
     if responsebest != "Not found":
-        room.send_text("Mit einem Score von " + str(best) + " wurde mit SpaCy folgendes gefunden")
-        send_message(room, responsebest)
+        await mutil.send_notice_reply(bot, room.room_id, "Mit einem Score von " + str(best) + " wurde mit SpaCy folgendes gefunden" , responseevent)
 
     # sequence matching
 
@@ -349,18 +372,20 @@ def new_message_handling(event, room, neo4j, nlp):
 
         if score > best:
             print("got a winner")
-            for response in neo4j.run(
-                    f"match (c:chat {{text:'{query['c.text']}'}})-[:EVENT]->(j) return j.string").data():
-                responsebest = response['j.string']
+            for response in neo4j.run(f"match (c:chat {{text:'{query['c.text']}'}})-[:EVENT]->(j) return j.eventId, j.timestamp").data():
+                responsebest = query['c.text']
+                responseevent = response['j.eventId']
+                reponsetime = response['j.timestamp']
                 best = score
 
     # Einfügen der neuen Nachricht in den Graphen
     neo4j.run(
-        f"create (c:chat {{text:'{nachricht}', time:'{zeit}'}})-[:EVENT]->(j:json {{string:'{json.dumps(event)}'}})")
+        f"create (c:chat {{text:'{nachricht}'}})-[:EVENT]->(j:json {{eventId:'{message.event_id}', timestamp:{message.server_timestamp}}})")
     # responsebest soll hier das Json-event der am Besten passenden Nachricht enthalten
     if responsebest != "Not found":
-        room.send_text("Mit einem Score von " + str(best) + " wurde mit Sequence-Matching folgendes gefunden")
-        send_message(room, responsebest)
+        await mutil.send_notice_reply(bot, room.room_id, "Mit einem Score von " + str(best) + " wurde mit sequence matching folgendes gefunden" , responseevent)
+
+
 
     # hier kann weitere Funktionalität angebunden werden
     # mit send_message(room, "json der zu referenzierenden Nachricht") kann auf eine Nachricht referenziert werden

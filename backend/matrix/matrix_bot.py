@@ -1,18 +1,11 @@
-import random
-import re
-import time
 import json
-import requests
-import py2neo
 import spacy
 from py2neo import Graph
-
+import simplematrixbotlib as botlib
+import re
 import matrix_util.matrix_util as mutil
-import json_util.json_util as jutil
+from backend.matrix import json_util as jutil
 from urllib.request import urlopen
-from matrix_util.MHandler_uncalled import MHandler_uncalled
-from matrix_bot_api.matrix_bot_api import MatrixBotAPI
-from matrix_bot_api.mregex_handler import MRegexHandler
 
 USERNAME = "kleiner_bot"
 PASSWORD = "MatrixBotPasswort123"
@@ -22,40 +15,22 @@ neo4j = Graph("bolt://localhost:7687", auth=("neo4j", NEO4JPASSWORD))
 nlp = spacy.load("de_core_news_lg")
 with open('Preset_Config.json') as json_file:
     presetConfig = json.load(json_file)
+LANGUAGE = 1
+
+"""
+Initialize Bot
+"""
+PREFIX = '!'
+creds = botlib.Creds(SERVER, USERNAME, PASSWORD)
+bot = botlib.Bot(creds)
 
 # https://matrix.org/docs/spec/client_server/latest#id43
 
-# wird auf !bot oder !Bot ausgeführt
-def bot_callback_called(room, event):
-    # check ob die Nachricht eine Valide Textnachicht ist
-    if not mutil.valid_text_msg(event):
-        return
 
-    # prints (nicht relevant)
-    sender = mutil.get_sender(event)
-    body = mutil.get_body(event)
-    type = mutil.get_type(event)
-    msgtype = mutil.get_msgtype(event)
-
-    print(body)
-    print("cought called msg by " + sender)
-    print("type:    " + type)
-    print("msgtype: " + msgtype)
-
-    # Bot call wird abgeschnitten
-    nachricht = body[5:len(body)]
-
-    if nachricht == '':
-        return
-
-    # volltextsuche_moses(room, event)
-
-    neo4j_suche(room, event)
-
-
-def volltextsuche_moses(room, event):
-    body = mutil.get_body(event)
-    nachricht = body[5:len(body)]
+async def volltextsuche_moses(room, message):
+    nachricht = message.body[18:]
+    nachricht = re.sub('[^A-Za-z0-9\-]+', ' ', nachricht)
+    print(nachricht)
 
     nachricht = nachricht.replace(" ", "+")
     url = "http://localhost:3000/moses/search/german.content?q="  # pagenotfound
@@ -74,61 +49,41 @@ def volltextsuche_moses(room, event):
             resp_to_text += ', '
 
     if ct == 0:
-        room.send_text('Leider war die Suche Erfolglos')
+        await mutil.send_notice_message(bot, room.room_id, 'Leider war die Suche Erfolglos')
     elif ct < 2:
-        room.send_text('Ich habe dazu etwas in diesem Modul gefunden: ' + resp_to_text)
+        await mutil.send_notice_message(bot, room.room_id, 'Ich habe dazu etwas in diesem Modul gefunden:\n' + resp_to_text)
     else:
-        room.send_text('Ich habe dazu etwas in diesen Modulen gefunden: \n' + resp_to_text)
+        await mutil.send_notice_message(bot, room.room_id, 'Ich habe dazu etwas in diesen Modulen gefunden:\n' + resp_to_text)
 
 
-def neo4j_suche(room, event):
+async def neo4j_volltextsuche(room, message):
     # room: raum-objekt der matrix-sdk
-    # event: Json der Nachricht, Format: Siehe json_util.new_message_handling
-
-    # nachricht ohne das initiale !bot
-    body = mutil.get_body(event)
-    nachricht = body[5:len(body)]
-
-    # cyper
-
-    room.send_text('Cypher Ergebnis:\n')
-
-
-# wird ausgeführt auch wenn der Bot nicht angesprochen wird
-
-
-def neo4j_volltextsuche(room, event):
-    # room: raum-objekt der matrix-sdk
-    # event: Json der Nachricht, Format: Siehe json_util.new_message_handling
-
-    print("neo4j Volltext")
-
-    # nachricht ohne das initiale !bot
-    body = mutil.get_body(event)
-    nachricht = body[9:len(body)]
-    # cyper
-
-    room.send_text('Hi: ' + nachricht)
+    # nachricht ohne das initiale !volltext
+    nachricht = message.body[9:]
 
     doc = nlp(nachricht)
-    searchresults = []
+    search_results = []
     for token in doc:
         if token.pos_ != "PUNCT" and token.pos_ != "SPACE":
             for name in neo4j.run(
-                    f"match (v:volltext {{lemma:'{token.lemma}'}})-[:`GEHÖRT_ZU`]-(a) return a.name").data():
-                if str(name["a.name"]) not in searchresults:
-                    searchresults.append(name["a.name"])
+                    f"match (v:volltext {{lemma:'{token.lemma}'}})-[:`GEHÖRT_ZU`]-(a) return a.name, a.Version, a.Modulnummer").data():
+                if str(name["a.name"]) not in search_results:
+                    search_results.append(name['a.name'] + ":" +
+                                            f"https://moseskonto.tu-berlin.de/moses/modultransfersystem/bolognamodule/beschreibung/anzeigen.html?nummer={name['a.Modulnummer']}&version={name['a.Version']}&sprache={LANGUAGE}")
             for name in neo4j.run(
-                    f"match (v:volltext {{text:'{token.text.lower()}'}})-[:`GEHÖRT_ZU`]-(b) return b.name").data():
-                if str(name["b.name"]) not in searchresults:
-                    searchresults.append(name["b.name"])
+                    f"match (v:volltext {{text:'{token.text.lower()}'}})-[:`GEHÖRT_ZU`]-(b) return b.name, b.Version, b.Modulnummer").data():
+                if str(name["b.name"]) not in search_results:
+                    search_results.append(name['b.name'] + ":" +
+                                          f"https://moseskonto.tu-berlin.de/moses/modultransfersystem/bolognamodule/beschreibung/anzeigen.html?nummer={name['b.Modulnummer']}&version={name['b.Version']}&sprache={LANGUAGE}")
 
-    if len(searchresults) == 0:
-        room.send_text('Leider war die Suche Erfolglos')
-    elif len(searchresults) < 2:
-        room.send_text('Ich habe dazu etwas in diesem Modul gefunden: ' + ', '.join(searchresults))
+    if len(search_results) == 0:
+        await mutil.send_notice_message(bot, room.room_id, 'Leider war die Suche Erfolglos')
+    elif len(search_results) < 2:
+        await mutil.send_notice_message(bot, room.room_id, 'Ich habe dazu etwas in diesem Modul gefunden:\n' + ',\n'.join(search_results))
+    elif len(search_results) > 10:
+        await mutil.send_notice_message(bot, room.room_id, 'Ich habe dazu etwas in diesen Modulen gefunden:\n' + ',\n'.join(search_results[:10]) + '\nund in vielen mehr. Bitte konkretisiere deine Suche etwas.')
     else:
-        room.send_text('Ich habe dazu etwas in diesen Modulen gefunden: \n' + ', '.join(searchresults))
+        await mutil.send_notice_message(bot, room.room_id, 'Ich habe dazu etwas in diesen Modulen gefunden:\n' + ',\n'.join(search_results))
 
 
 # wird ausgeführt auch wenn der Bot nicht angesprochen wird
@@ -162,40 +117,32 @@ def isis_suche(room, event):
 
 # Event_Handlers und Main Thread
 # Handles all the preset ways the bot interacts
-def bot_callback_preset(room, event):
-    print("we good!")
-    preset = mutil.get_body(event)[1:].split()[0].lower()
+async def bot_callback_preset(room, message):
+    match = botlib.MessageMatch(room, message, bot)
 
-    if preset == "volltext":
-        neo4j_volltextsuche(room, event)
-    elif preset == "isis":
-        isis_suche(room, event)
+    if match.not_from_this_bot() and match.prefix(PREFIX):
+        if match.command("volltext"):
+            await neo4j_volltextsuche(room, message)
+        elif match.command("volltext_klassik"):
+            await volltextsuche_moses(room, message)
+        elif match.command("isis"):
+            isis_suche(room, message)
+        elif match.command("echo"):
+            await mutil.send_notice_message(bot, room.room_id, message.body)
+        else:
+            for inquiry in presetConfig:
+                if match.command(inquiry):
+                    await mutil.send_notice_message(bot, room.room_id, presetConfig[inquiry])
     else:
-        for inquiry in presetConfig:
-            if inquiry == preset:
-                room.send_text(presetConfig[inquiry])
+        await bot_callback_uncalled(room, message)
 
 
 def main():
-    bot = MatrixBotAPI(USERNAME, PASSWORD, SERVER)
 
-    # bot_handler_called_1 = MRegexHandler("!bot", bot_callback_called)
-    # bot_handler_called_2 = MRegexHandler("!Bot", bot_callback_called)
-    bot_handler_preset = MRegexHandler("!", bot_callback_preset)
-    bot_handler_uncalled = MHandler_uncalled(bot_callback_uncalled)
-    # bot_handler_volltextsuche = MRegexHandler("!volltext", neo4j_volltextsuche)
+    bot.add_message_listener(bot_callback_preset)
 
-    # bot.add_handler(bot_handler_called_1)
-    # bot.add_handler(bot_handler_called_2)
-    bot.add_handler(bot_handler_preset)
-    bot.add_handler(bot_handler_uncalled)
-    # bot.add_handler(bot_handler_volltextsuche)
-
-    bot.start_polling()
+    bot.run()
     print("bot is ready")
-
-    while True:
-        input()
 
 
 if __name__ == "__main__":
@@ -210,3 +157,4 @@ if __name__ == "__main__":
 #
 # 2
 # provide api that does not use matrix (http?)
+# https://matrix.org/docs/spec/client_server/latest#m-notice

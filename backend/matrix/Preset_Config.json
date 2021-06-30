@@ -1,6 +1,5 @@
-
 {
     "hey": "Hallo",
     "wer": "Ich bin der Kleine_Bot",
-    "help": "Ich kann:\n!help: Hier erkläre ich dir meine Funktionen.\n!volltext: Ich finde dir alle Module mit einem bestimmten Wort, auch wenn sie anders Konjugiert sind\n!tutorien: Ich schicke dir alle Tutorien"
+    "help": "Ich kann:\n!help: Hier erkl\u00e4re ich dir meine Funktionen.\n!volltext: Ich finde dir alle Module mit einem bestimmten Wort, auch wenn sie anders Konjugiert sind\n!tutorien: Ich schicke dir alle Tutorien"
 }
