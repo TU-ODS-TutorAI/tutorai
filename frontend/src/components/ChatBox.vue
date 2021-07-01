@@ -1,6 +1,16 @@
 <template>
   <div>
     <div class="container chat">
+      <select class="form-select" v-model="selected">
+        <option disabled value="">Please Select the Module Context</option>
+        <option
+          v-for="(item, index) in modules"
+          :key="index"
+          :value="item.number"
+        >
+          {{ item.title }}
+        </option>
+      </select>
       <div class="chat-box">
         <Message
           v-for="(item, index) in messages"
@@ -28,19 +38,34 @@ export default {
   data() {
     return {
       messages: [],
+      modules: [],
+      selected: "",
     };
+  },
+  created() {
+    axios({
+      method: "GET",
+      url: `http://tutorai.ddns.net:3000/moses`,
+    }).then(
+      (result) => {
+        this.modules = result.data.modules.sort(function (a, b) {
+          return ("" + a.title).localeCompare(b.title);
+        });
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   },
   methods: {
     sendRequest(message) {
       this.messages.push({ msg: message, right: true });
-      console.log(this.messages);
       axios({
         method: "GET",
-        url: `http://localhost:5000/tutorai/classic/${message}/40017`,
+        url: `http://tutorai.ddns.net:5000/tutorai/classic/${message}/${this.selected}`,
       }).then(
         (result) => {
-          this.messages.push({ msg: result, right: false });
-          console.log(this.messages);
+          this.messages.push({ msg: result.data.answer, right: false });
         },
         (error) => {
           console.error(error);
