@@ -1,0 +1,636 @@
+{
+  "name": "WS 20/21 ODS Einführung in die Programmierung",
+  "link": "https://isis.tu-berlin.de/course/view.php?id=21949",
+  "messages": [
+    {
+      "text": "Liebe Studierende,  wir werden morgen, Freitag den 16.04.2021 um 9:00 Uhr die Ergebnisse (Punktzahl) und den Notenschlüssel der e-Klausur vom 09.04.2021 in ISIS veröffentlichen.  Die Einsicht zur e-Klausur findet am Montag, 19.04.2021, zwischen 10:00 und 16:00 Uhr statt. Den Zoom-Link für die Einsicht finden Sie zu gegebener Zeit auf unserer ISIS-Seite.  Viele Grüße, IntroProg-Team",
+      "answers_in_thread": 1,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372252#p694017"
+    },
+    {
+      "text": "Liebe Studierende, morgen endet die Anmeldefrist für den zweiten Prüfungstermin. Bitte melden Sie sich noch an, falls Sie daran (Freitag, 09.04., 8 Uhr) teilnehmen möchten. Nehmen Sie zudem bitte an der zweiten Probeklausur in ISIS teil, die als technischer Test dient. Schauen Sie sich insbesondere die alternative Abgabemethode für die Drag&Drop-Aufgaben an und bereiten Sie ggf. den Ablauf vor. Viele Grüße, IntroProg-Team",
+      "answers_in_thread": 1,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=368432#p687022"
+    },
+    {
+      "text": "Liebe Studierende,  die 2. e-Klausur startet am 9.4.2021, 8:00 Uhr. Die Bearbeitungszeit der Klausur ist 99 Minuten.  Der Zoom-Link für die Klausur ist: https://tu-berlin.zoom.us/j/69288857248?pwd=d1dsRHF4Zm92a1BHRmRMRHRJYkVNdz09  Bitte melden Sie sich für die 2. Klausur in QISPOS an. Bitte achten Sie darauf, dass Sie sich in dem richtigen Datensatz mit der Nummer \"6135\" eintragen.  Die Anmeldung beginnt am Mittwoch, 31.3.2021, und ist bis einschließlich Mittwoch, 7.4.2021, möglich.  Anmeldungen, die nicht über QISPOS vorgenommen werden können, müssen über den hier beigefügten Prüfungsanmeldebogen erfolgen. Bitte füllen Sie diesen digital aus und unterschreiben ihn elektronisch. Siehe https://www.howtogeek.com/164668/how-to-electronically-sign-document. Schicken Sie ihn dann bitte bis einschließlich 6.4.2021 an die folgende E-Mail-Adresse: introprog@ods.tu-berlin.de. Bögen, die zu spät eintreffen, können leider nicht mehr berücksichtigt werden.  Wenn Sie Ihr technisches Setup überprüfen möchten bzw. das Tool zur Durchführung der e-Klausur kennenlernen wollen, bieten wir Ihnen dazu wieder die Möglichkeit am 1.4.2021 um 10:00 Uhr. Den Zoom-Link dazu finden Sie in ISIS. Es handelt sich dabei nur um einen Test Ihres technischen Setups. Wie schon bei der letzten Probe für die 1. e-Klausur, werden keine prüfungsrelevanten Beispiele gezeigt.  Mit freundlichen Grüßen  Prof. Dr. Manfred Hauswirth",
+      "answers_in_thread": 1,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=367057#p684374"
+    },
+    {
+      "text": "Liebe IntroProg-Orga Team,  Auf der Musterlösung zum SelectionSort Korrektheitsbeweis 'innere Schleife, 2. Fall, zweiter Punkt' definieren wir die Menge von k bis j-1. Wir haben uns gefragt ob das stimmt, weil es uns naheliegender scheint, dass wir diese bis j'-1 definieren.  Vielen Dank und beste Grüße; LS",
+      "answers_in_thread": 1,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=364010#p677201"
+    },
+    {
+      "text": "Finden die Rechnerübung bis zum Klausur statt?",
+      "answers_in_thread": 1,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=362884#p674783"
+    },
+    {
+      "text": "Hallo,   Ist der zweiter Prüfungstermin am 09.04. nur für die Wiederholung gedacht, oder kann jeder sich für diesen Termin anmelden (ohne im ersten Termin durchzufallen)?  Schöne Grüße, Mohmed",
+      "answers_in_thread": 1,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=360308#p669336"
+    },
+    {
+      "text": "Hallo,  ich wollte mal nachfragen wie Ihr die Klausur so fandet und wie es euch so ergangen ist. Ich will hier keine Lösungen vergleichen und falls so ein Beitrag nicht gestattet ist, werde ich den auch wieder löschen. Ich persönlich fand die Klausur sehr anspruchsvoll und hatte mich als gut vorbereitet eingeschätzt. Wie ging es euch?  EDIT: Ich hatte auch mehrere technische Probleme. Bei mir wurden Dinge erst falsch angezeigt und erst nach mehrmaligen aktualisieren (aus Verzweiflung da ich mir manche Werte nicht logisch erklären konnte) wurden mir die Richtigen angezeigt. Dieses Problem trat 3x auf. Hatten Andere das auch oder lag es an meinem Browser?",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680721"
+    },
+    {
+      "text": "Werde stabil durchfallen. Um ehrlich zu sein fand ich diese Klausur die schwierigste von allen Klausuren im 1. Semester. Insbesondere die Complexity und Hanoi Aufgabe. Obwohl die latter ganz gut machbar sein sollte, wenn man etwas mehr Zeit hatte...  Ich denke viele Kommilitonen werden auch dieser Meinung sein.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680730"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680735"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680739"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680793"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680817"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680860"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680882"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680935"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680993"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p681367"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p688183"
+    },
+    {
+      "text": "Falls Aufgabenstellungen nicht falsch werden, dannn Ok. Aber ich habe zu viel Zeit verloren bis ich verstanden habe, dass es nicht meinen Fehler ist.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680736"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680740"
+    },
+    {
+      "text": "Ging mir genauso - viele Fehler. Beim nachfragen in der Zoom Konferenz hieß es \"kann passieren sorry\"",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680745"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680775"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680737"
+    },
+    {
+      "text": "+1 und diese Drag und Drop Aufgabe hat bei mir nach jedem drop gehangen und bei manchen konnte ich es dann auch gar nicht mehr ändern und einmal ist dieses gelbe Kästchen auch einfach verschwunden.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680747"
+    },
+    {
+      "text": "Bei mir auch",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680876"
+    },
+    {
+      "text": "Gleich bei mir !",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p681193"
+    },
+    {
+      "text": "Ich fand die Klausur auch sehr schwer, vor allem hinsichtlich der Zeit. Ich hatte zum Glück keine technischen Probleme.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680751"
+    },
+    {
+      "text": "Technische Schwierigkeiten und unverhältnismäßiger Schwierigkeitsgrad. Definitiv Top 3 der unfairsten Tests die ich in meinem Leben geschrieben habe.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680760"
+    },
+    {
+      "text": "Sehr hoher Schwierigkeitsgrad und falsch gestellte Fragen, die bei mir massiv zu Verwirrung geführt haben. Ich hoffe darauf, dass ich nicht bestehe, damit ich nochmal schreiben kann.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680764"
+    },
+    {
+      "text": "Ich hatte auch das Problem, dass der Pseudocode erst nach mehrmaligen aktualisieren Sinn gemacht hat. Habe dieses feature leider erst sehr spät entdeckt. Jedoch wäre die Bearbeitungszeit auch ohne diese Probleme viel zu kurz für den Aufwand der Aufgaben (meine Meinung)",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680768"
+    },
+    {
+      "text": "Ich fand die Klausur vom Schwierigkeitsgrad zu hoch. Eine Probeklausur die wenigstens einen annähernden Schwierigkeitsgrad hätte, wäre eine gute Vorbereitung gewesen. Die Zeit war viel zu knapp, vor allem wenn man bedenkt, dass man in ca. 100 min. um die 25 Fragen mit einer Programmieraufgaben schaffen sollte, scheint mir utopisch knapp. Und meine Klausur hatte viele Bugs und einige Aufgabenstellungen waren sehr verwirrend. Zusammenfassend: die Klausur war für mich ein Reinfall.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680770"
+    },
+    {
+      "text": "+1 seh ich genauso",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680782"
+    },
+    {
+      "text": "Ja, utopisch trifft die Zeitbemessung sehr gut. Schon ohne die Programmieraufgaben wäre die Zeit aufgrund der extrem langen Aufgaben knapp.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680795"
+    },
+    {
+      "text": "+1 ja ich hatte auch viel zu wenig Zeit und vorallem mit der Größe der Korrektheitsaufgabe und der Programmieraufgabe zum Stack (die ich noch nicht mal komplett verstanden habe). Auch die letzte Aufgabe habe ich überhaupt nicht verstanden was in die Klammern hinter die Aussagen soll (ich dachte erst es ware 0 für falsch und 1 für wahr, aber dann kam bei einer Aussage eine 2...) und unten was genau wir wie zusammenfassen sollten.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680808"
+    },
+    {
+      "text": "true. da war ein gegebener sortieralgorithmus, der am anfang/mitte der klausur eine variable k hatte, die halt nirgend vorher zugewiesen wurde. am ende der klausur schaue ich nochmal in die aufgabe und die haben die variable einfach geändert. in mitten der klausur. ich bin einfach shook",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680813"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680831"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680815"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680823"
+    },
+    {
+      "text": "Sowas von! Vor allem, wenn man die meiste Zeit darauf verschwendet Fehler zu finden, die überhaupt nicht die eigenen sind, und die Aufgabe dann 2 min NACH Abgabe im Zoom zum 3. mal korrigiert wird.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680834"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680837"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680900"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p681196"
+    },
+    {
+      "text": "Bei der sort(A,i,j) Aufgabe saß ich ne halbe Stunde bis dann 10 Minuten vor Abgabe der Code verändert wurde... finde man sollte die neu schreiben und dieses mal die Klausur besser vorbereiten",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680796"
+    },
+    {
+      "text": "ich hab mich mit den altklausuren vorbereitet. die waren n witz im gegensatz dazu soviele Lücken im text man muss erstmal 20m das durchlesen um zu checken was die wollen und dann denkst du über jede lücke nach .die sortieraufgabe war so komisch gestellt und hatte n fehler und eine Heap-aufgabe war komisch zu interpretieren man hätte 2 sachen verstehen können. Die letzte aufgabe an sich ok aber die erwarten natürlich dass du jede lücke in 20 sekunden verstehst.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680800"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680857"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680873"
+    },
+    {
+      "text": "Genau .",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680887"
+    },
+    {
+      "text": "Saß mindestens 15 min an Aufgabe 21, war mit einem Tutor in einer Breakoutsession der mein Problem auch nicht lösen konnte und dann kommt am ende raus, dass die Aufgabe falsch ist....bzw. der Code. Ich fand die Klausur auch viel zu schwer und habe wegen solchen Sachen auch voll viel Zeit verloren. In Aufgabe 22 habe ich auch viel Zeit verloren, weil ich nicht wusste wie ich die print Funktion programmieren soll und am Ende sollte man die weg lassen ....",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680804"
+    },
+    {
+      "text": "Ich habe viel Zeit in die Klausurvorbereitung gesteckt und sehe mich jetzt mit so einer dahingerotzten Aufgabenstellung konfrontiert, bei der die Hälfte fehlt? keine Ahnung wie es euch geht, aber das fühlt sich sehr unfair an.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680805"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680812"
+    },
+    {
+      "text": "Lief bei mir ähnlich. Dazu hatte ich angenommen, dass der Zoom Raum wie in den anderen Klausuren als Notfallkontakt und nicht als Verkündungspunkt verwendet wird und habe diesen daher nicht betreten. In den Minuten der Prüfung ist mir beim durchgehen der Aufgaben aufgefallen, dass sich bei mehreren Aufgaben die Inhalte verändert haben (unter Anderem das k im Pseudocode über welches ich mir vorher den Kopf zerbrochen habe).",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680810"
+    },
+    {
+      "text": "bei mir hat dasselbe passiert. sehr verwirrend",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680883"
+    },
+    {
+      "text": "bei mir ebenfalls",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p681037"
+    },
+    {
+      "text": "Ja die Klausur war sehr schecht gebalanced. Ich meine für die Türme von Hanoi aufgabe bräuchte man 1-2 Stunden nicht 30 Minute! Fremden Code lesen ist richtig Zaitaufwändig, auch mit guten Kommentaren und 3 neue Funktion schreiben kannman auch nicht blitzschnell machen. Die ersteller der Klausur haben es sich offensichtlich nicht ganz gut überlegt...",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680816"
+    },
+    {
+      "text": "Ja!",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680878"
+    },
+    {
+      "text": "Alleine die Aufgabenstellung zu lesen hat extrem viel Zeit gekostet, das war fast eine A4 Seite Text.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680890"
+    },
+    {
+      "text": "Ich konnte beim zweiten Drüberschauen die Elemente der Verketteten Liste (Schiebeelemente) nicht mehr verschieben. Das ist natürlich doof, weil ich meinen Fehler nicht korrigieren konnte obwohl ich die richtige Lösung quasi hatte, aber nicht \"hinschieben\" konnte. Und ich hatte noch eine Minute Zeit und es wollte einfach nicht. Sogar ein Reload der Seite hat keine Verbesserung gebracht. Das ist natürlich Mist!",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680818"
+    },
+    {
+      "text": "das war auf jeden fall eine sehr unfaire klausur insbesondere wenn man die kommunikation des introprog teams bzw das bereitgestellte lernmaterial betrachtet. quasi ALLE aufgaben in dieser veranstaltung waren größtenteils sinnlos zur konkreten klausurvorbereitung. hatte auch technische probleme beim drag & drop und habe es per video aufgenommen.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680825"
+    },
+    {
+      "text": "+1!!!!!!!!!!!!",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680830"
+    },
+    {
+      "text": "Technische Probleme, Unübersichtlich, sehr schwer",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680842"
+    },
+    {
+      "text": "Ich empfinde das als höchst problematisch, die Angaben der Klausur, auch wenn sie fehlerbehaftet ist, in der Mitte (ich habe die Aufgabe21/22 erst in den letzten 20 Minuten nochmal geöffnet) der Bearbeitungszeit zu verändern. Das stresst einen unglaublich und vergeudet so viel wertvolle Bedenkzeit in einer Klausur, die ich persönlich auch als viel zu umfangreich empfunden habe. Die Hausaufgaben, vor allem im Theoriebereich, spiegeln überhaupt nicht den Umfang und das Leistungsniveau der Klausur wieder, während z.B. bei AnaLinA das genaue Gegenteil der Fall war. Eine tolle Probeklausur, die das Niveau perfekt widergespiegelt hat und die definitiv zu lösen war, wenn man im Semester gut mitgearbeitet hat.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680844"
+    },
+    {
+      "text": "Ein Problem war wahrscheinlich die Kombination des Zeitlimits mit den massiven wall of text in den Hanoi- und Korrektheitsbeweisaufgaben. Viele Lücken z.B. in der Komplexitätsanalyse waren trivial, während andere überproportional viel Zeit in Anspruch genommen haben. So große Niveauschwankungen sind als Prüfling echt anstrengend zu bearbeiten, weil man viel Zeit mit second-guessing verbringt, da einem die Lösung als \"zu einfach\" vorkommen.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680852"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680863"
+    },
+    {
+      "text": "Die Lösung ist einfach, aber die Aufgabe machte es sehr schwer, man musste 20 Mal lesen, bevor man die erste Frage beantwortete. Bei so vielen Lücken funktioniert es nicht oder es braucht mehr Zeit",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680899"
+    },
+    {
+      "text": "+1 Sie müssen zumindest den Durchschnitt von Wertung lower machen. ich kann sicherlich sagen, es niemanden geben würde, der besser als 2.5 bekommt",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680907"
+    },
+    {
+      "text": "Die Prüfung war meine Meinung nach mega hart. Ich dachte in einem moment ob ich richtig in diese Klausur bin.Fand sehr unklar und Übersichtlich .........",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680909"
+    },
+    {
+      "text": "Die Klausur war einfach NICHT MACHBAR. Zeitdruck war einfach zu groß. Außerdem war die ÜBERHAUPT NICHT mit der Probeklausur vergleichbar, und ich finde die ganze Situation einfach unfair.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680908"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680934"
+    },
+    {
+      "text": "Hey, falls ich es hier richtig mitbekommen habe, wurden Teilweise Fehler im Zoom-Raum klargestellt. Ich bin diesem gar nicht beigetreten, einerseits um die Ablenkung zu minimieren und andererseits da ich davon ausgegeangen war, dass dort Notfälle oder dringende Fragen die einzelne betreffen besprochen werden. Dort wäre meiner Meinung nach eine bessere Kommunikation im vornherein anggemessen gewesen. Durch den Zeitmangel habe ich z.B nichtmal mitbekommen, dass sich das k nochmal verändert hat, über welches ich mir vorher auch zu lange den Kopf zerbrochen habe.  Es ist schon sehr schade, dass solche Fehler vorher nicht ausreichend überprüft und behoben wurden. Ich kann mir vorstellen wie umfangreich sich das alles gestaltet, trotzdem hätte ich mir vom Introprog-Team mehr erwartet. Außerdem fand ich es auch viel zu viel Text. Da ist leider unnötig viel Zeit flöten gegangen, vor allem, wenn man dann noch komische Formulierungen mehrmals überdenken und verstehen muss.  Die Punkteverteilung finde ich auch etwas fragwürdig. Dort hätte ich mir aus der Probeklausur eine adäquatere Darstellung gewünscht. Damit man einschätzen kann wie viel Zeit man pro Punkt hat. Z.B.: Bei Aufgabe 23 sind nach der Punkteverteilung ca. 15 Minuten vorgesehen. Das ist meiner Meinung nach zu wenig um den Text zu lesen, zu verstehen, ein kurze Handsimulation zu machen, Dateien runter- und hochladen, sowie die eigentlichen Aufgaben zu bearbeiten und zu programmieren, bei denen man auch nochmal nachlesen muss, ob man alles von der Anforderung beachtet hat.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p680943"
+    },
+    {
+      "text": "Indirekte Antwort auf Deine Frage: Zum Feedback, dass verwirrende Fehler eingebaut waren und das der Zeitrahmen für die Beweise und Programmieraufgaben womöglich beim Lösen der Aufgaben auch geschulten Personen nur knapp ausreichend war, somit die Klausur schwer lösbar wegen des Zeitverlustes durch die vorherigen Fehler in der Aufgabenstellung, ist nichts hinzu zu fügen.  Will an dieser Stelle gleichwohl einen anderen Punkt stark machen: Fehler passieren jedem, auch einem Lehrstuhl und bei Prüfungsvorbereitung. Bei der negativen Überraschung während der Prüfungssituation ist es verständlich, dass wir überrumpelt und verärgert reagieren, andererseits will ich nochmal an das Semester und das Engagement der Prüfenden erinnern. Die wissenschaftlichen Mitarbeiter und der Professor haben sich die letzten Monate sehr dafür eingesetzt haben, dass wir den Stoff gut lernen. Beispiele: Regelmäßige Überziehung der Vorlesung um Fragen zu klären, Tutorien bis in den späten Abende um bei Code-Fehlern zu helfen, regelmäßige und ausführliche Tutorien.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p681021"
+    },
+    {
+      "text": "ja, kann auch da nur zustimmen. die hilfe und der effort der in der betreuten rechnerzeit gegeben wurde war toll, um so überraschender war dann aber auch die klausur",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p681069"
+    },
+    {
+      "text": "Das stimmt. Das Engagement der TutorInnen war toll. Auch sonst fand ich die Lehrveranstaltung super, die Vorlesung von Prof. Hauswirth hat Spaß gemacht usw. Daher hätte ich auch nie damit gerechnet, dass die Klausur so ein Desaster wird. Ich denke uns ist allen klar, dass hier keine böse Absicht von Seiten des IntroProg-Teams vorliegt. Die Auswirkungen sind trotzdem leider die gleichen, ob böse Absicht oder versehentlich verursacht.",
+      "answers_in_thread": 66,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365560#p681524"
+    },
+    {
+      "text": "Hey Leute, auch wir von der Freitagsrunde haben von dieser unglücklichen Klausur mitbekommen. Solltet ihr definitiv eure Klausur wiederholen wollen, so empfehlen wir folgendes: Erklärt bitte möglichst vor Bekanntgabe der Noten gegenüber dem Fachgebiet, dass ihr wegen technischer Probleme an der Klausur nicht ordnungsgemäß teilnehmen konntet und ihr deswegen von eurer Anmeldung nachträglich zurücktreten wollt [1]. Die Klausur würde dann als nicht angetreten gelten, ihr könnt euch also regulär zum zweiten Termin anmelden (ohne Fehlversuch). Wir gehen aktuell davon aus, dass euch das Fachgebiet diese Möglichkeit auch einräumen wird. Solltet ihr weitere Fragen haben, könnt ihr uns auch gerne eine Mail an info@freitagsrunde.org schreiben oder unserem Matrix-Channel auf https://chat.tu-berlin.de/#/room/#freitagsrunde:matrix.tu-berlin.de joinen. Liebe Grüße Carsten und die Freitagsrunde  PS: Bitte antwortet mir nicht hier, da ich in diesem Forum nicht subscribed bin :) [1]: https://www.tu.berlin/pruefungen/pruefungen-unter-pandemiebedingungen/pruefungen-unter-pandemiebedingungen Ergänzende Hinweise für Lehrende und Prüfungsausschüsse >> Durchführung von Onlineklausuren >> Problembehandlung",
+      "answers_in_thread": 1,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365835#p681425"
+    },
+    {
+      "text": "Moin, Die Klausur war mega hart und für mein Empfinden unfair, aber das wisst ihr vermutlich selbst.. Wie viele Punkte gab es insgesamt und welchen Notenschlüssel verwendet ihr? Lieben Gruß",
+      "answers_in_thread": 4,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365574#p680797"
+    },
+    {
+      "text": "ich hab 46,5 gezählt und fand sie auch hart und ich finde ich wurde unangemessen geprüft",
+      "answers_in_thread": 4,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365574#p680914"
+    },
+    {
+      "text": "ich habe genau 50 gezählt.",
+      "answers_in_thread": 4,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365574#p680923"
+    },
+    {
+      "text": "50 und da 10 an korrektheit....hatte hoffnung bei 60 vllt knapp zu bestehen jz geht garnix mehr",
+      "answers_in_thread": 4,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=365574#p680997"
+    },
+    {
+      "text": "Hier könnt ihr Fragen stellen bzw. Themen benennen, auf die in der offenen Vorlesung am 25.02.2021 nochmal eingegangen werden soll.  Intro-Prog Team",
+      "answers_in_thread": 5,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=359875#p668484"
+    },
+    {
+      "text": "Eine Zusammenfassung der verschiedenen Sortieren Algorithmen wäre sehr nett. Danke für die Hilfe",
+      "answers_in_thread": 5,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=359875#p669298"
+    },
+    {
+      "text": "Könntet ihr nochmal auf den Beweis mit Induktion eingehen? Vielleicht auch ein paar Beispiele oder die Hausaufgabe durchrechnen.  Vielen Dank!",
+      "answers_in_thread": 5,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=359875#p669497"
+    },
+    {
+      "text": "Hallo, es mag etwas spät sein, aber ich würde mich über eine Zusammenfassung der Datenstrukturen (Bäume,einfach verkettete Listen, Arrays... etc.) mit jeweiligen Vorteilen und Nachteilen freuen. Liebe Grüße",
+      "answers_in_thread": 5,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=359875#p669746"
+    },
+    {
+      "text": "Beweis mit Induktion war wirklich schwer zu verstehen. Könntet ihr nochmal darauf eingehen? Vielleicht mit Beispielen. Danke schön!",
+      "answers_in_thread": 5,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=359875#p670167"
+    },
+    {
+      "text": "Liebes Team,  Ich danke, dass die Klausur sehr schnell korrigiert ist aber Ich bin sehr enttauscht mit dem Notenschlüssel und finde es unfair, dass die erste und zweite Klausur mit unterschiedlichen Notenschlüsseln bewertet werden , obwohl die Schwierigkeitsniveau nicht so unterschiedlich war . Ich bin der Ansicht, dass der einzige Unterschied  zwischen zwei Klausuren ist , dass die Korrektheitsbeweis bei zweiten Klausur  simpler war , aber dafür waren die  Multiple Choice und Datenstruktur   Aufgaben  anspruchsvoller und auch die Handsimulation Aufgabe. Außerdem glaube ich , dass die erste und zweite Klausur die gleiche oder fast gleiche  Anzahl an Fragen haben und die Zeitdruck wieder da war .   Ich bin ein Student an der TU seit 3 Semestern und habe weder ein Modul gesehen, noch von meine Kommilitonen gehört, wobei die erste und zweite Klausur mit unterschiedliche Notenschlüsseln bewertet wurden und was noch auffällig ist, dass die Notenschlüssel erst nach dem Korrektur veröffentlicht wird und Studenten haben keine Idee mit welcher Punktzahl sie bestehen würden. Ich persönlich habe 21.03 Punkte bekommen und mit 0.47 Punkten nicht bestanden , wenn ich vor der Klausur wissen würde mit wie viele Punkten man besteht , dann würde ich z.B eine einfache  Aufgabe lösen, dass ich wegen Zeitdruck gar nicht angeschaut habe anstatt  mich mit  Programmieraufgabe zu beschaftigen.   Herr Foucard hat mir gesagt ,dass \"Die Punkte werden aus Fairness-Gründen bei IntroProg leider nicht aufgerundet. \"   Es freut mich sehr , dass Sie um Fairness kümmern und das ist genau was ich auch will . Wenn auch  es ein Schwierigkeitsniveau Unterschied zwischen zwei Klausuren gibt ( Ich finde es nicht so ) , war das  nur ein sehr kleiner Unterschied , wie bei allen anderen Modulen und bei keinem anderen Modul führt solche kleine Schwierigkeitsniveau Unterschiede zwischen ersten und zweiten Termin zum verschiedenen Notenschlüsseln. Ich hoffe ,dass Sie mein Feedback betrachten und dafür eine Lösung bieten  Beste Grüßen",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694374"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694390"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694416"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694419"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694433"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694455"
+    },
+    {
+      "text": "Ich kann nur zustimmen. Zwei ungefähr gleich schwere Klausuren mit verschiedenen Notenschlüssel finde ich unfair . MfG",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694496"
+    },
+    {
+      "text": "Sehr geehrtes Team,  Trotz dem vorwiegend negativen Feedback nach der 1.Klausur fand ich bei der zweiten nur den Korrektheitsbeweis leichter, aber die MC-Fragen, aus denen man vorher noch die benötigten Punkte bekommen könnte, sogar schwieriger. Auch bei der Programmieraufgabe gab es im Vergleich zum 1.Termin keinen Unterschied bezüglich des Schwierigkeitsgrads, indem sie genau so lang und anspruchsvoll war. Folglich bitte ich um Verständnis und einen fairen Notenschlüssel, und bedanke mich bei Ihnen im Voraus.  VG, Veneta",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694515"
+    },
+    {
+      "text": "STIMME zu",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694620"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694657"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694665"
+    },
+    {
+      "text": "Ich kann dir nur zustimmen! Mich freut es wirklich, dass das IntroProg-Team unsere Kritik ernst nimmt, allerdings finde ich dass man die Klausur noch fairer gestalten kann, es gab schon wieder einen riesen Zeitdruck und sehr anspruchsvolle Aufgaben, wo es gar nicht möglich war alle Aufgaben zeitgerecht zu bearbeiten. Mir fehlen auch nur 0.6 Punkte oder so, und ich würde eine kleine Anpassung an den Notenschlüssen sehr sinnvoll, sodass die Bewertung wirklich fairer für alle ist. Ich habe auch von vielen mitbekommen, dass sie die Programmieraufgabe (12 Punkte, also ein VIERTEL der Klausurnote) überhaupt nicht geschafft haben, was ich auch verstehen kann wegen dem Zeitdruck. Ich wünsche mir dass Sie alles in Betracht ziehen und unser Feedback ernst nehmen und dementsprechend eine angemessene Lösung finden. Liebe Grüße",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694673"
+    },
+    {
+      "text": "Sehe ich auch so.",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694847"
+    },
+    {
+      "text": "Es Macht Sinn, ich stimme zu.",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694865"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p694886"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p695029"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p695155"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p695172"
+    },
+    {
+      "text": "+1",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p695220"
+    },
+    {
+      "text": "+1   Ich kann mich dem nur anschließen, finde den Notenschlüssel auch unfair. Bei der ersten Klausur gab es schon Kritik, dass die Zeit bei weitem nicht ausreiche, um alle Fragen (korrekt) zu beantworten und dass die Programmieraufgabe zu viel Zeit kostet. Die Klausuraufgaben waren meiner Meinung teils schwerer und mit der Meinung bin ich nicht alleine. Ein Beispiel: Die Türme von Hanoi sind ein bekanntes Beispiel und definitv einfacher zu verstehen (da konnte man auch aus der HA kopieren) die Programmieraufgabe diesmal war viel schwerer und dazu kommt noch, dass diese allein 1/4 der Gesamtpunktzahl ausmacht ?!  Außerdem kann ich nur das wiederholen, was beim ersten Mal gesagt wurde: \"Es wurde mehrmals von verschiedenen Tutoren/WiMis gesagt, dass man sich an ihr orientieren könne, jedoch bot sie keine sinnvolle Vorbereitung auf die Klausur. Die Aufgaben haben sich sehr stark in ihrer Art und dem Niveau von der Klausur unterschieden. Auch die Probeklausur war weder inhaltlich noch technisch eine ausreichende Vorbereitung. So unterschied sich z.B. der Korrektheitsbeweis grundlegend von der Klausur. Es bleibt weiterhin die Frage offen weshalb uns keine inhaltlich ernstzunehmende Probeklausur zugänglich gemacht werden konnte wie es in allen anderen Kursen der Fall war.\"  Ich habe das Gefühl, dass die Kritik vom 1.Termin nicht wirklich ernst genommen wurden ist und es einfach nur eine Anpassung des Notenschlüssel gab. Ich hoffe Sie denken darüber nochmal nach und deshalb bitte ich Sie auch hier die gleiche Anpassung zu machen.",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p695352"
+    },
+    {
+      "text": "sehr gut gesagt ich stimme komplett zu",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p695619"
+    },
+    {
+      "text": "+1  Ich denke auch, es ist unmöglich in der gegebenen Zeit alle Fragen (richtig) zu beantworten. Ich hatte nur Zeit um 32 Punkte von 49 Punkten zu beantworten. Ich denke jedoch, man könnte es schneller machen und habe ein bisschen Zeit an manchen Stellen verloren (Allerdings manche Fragen waren einfach tricky). Ich denke deshalb, das man aufgrund der mangelnden Zeit auch maximal nur ca. 3/4 der Klausur (also ungefähr 37 Punkte) bearbeiten konnte. Deswegen finde ich die aktuelle Anpassung der Noten auch unfair und bitte um Überlegung.  Die Prüfung war zugleich allgemein viel besser gemacht und nachgedacht. Vielen Dank dafür. Ich kann auch mir auch vorstellen, dass dieses Online Semester für Introprog-Team extrem aufwändig gewesen ist und neue unbekannte Herausforderungen gestellt hat. Vielen Dank für die Arbeit und große Mühe.  Ich denke nicht dass, die vorherige Kritik nicht im Ernst genommen wurden. Ich denke eher dass, es irgendwelche Problem bei der Konzipierung der Prüfungen in Bezug auf die Zeit gibt. Wenn zwei Prüfungen nacheinander so extrem unrealistisch zeitlich bemessen werden. Das Problem ist dann bei unrealistischen Vorstellungen. Ich bitte daher um Überlegung und darum, die Zeit von zukünftigen Prüfungen mit anderen Methoden oder anders zu berechnen und außerdem überprüfen, ob Anfänger, also Studenten von \"*Einführung* in die Programmierung\", die Prüfung in der Zeit realistisch wahrnehmen können.  Vielen Dank, Mit freundlichen Grüßen Gabriel",
+      "answers_in_thread": 22,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372451#p696007"
+    },
+    {
+      "text": "Liebes Team, wäre es möglich, dass Sie uns den Notenspiegel (oder Punktespiegel) der Klausur vom 09.04. bereitstellen? (Ich meine nicht den Notenschlüssel, sondern die Verteilung der Noten auf die Geprüften.) Danke & freundliche Grüße Elena Gandert",
+      "answers_in_thread": 1,
+      "tutor_answer_in_thread": "",
+      "link": "https://isis.tu-berlin.de/mod/forum/discuss.php?d=372576#p694602"
+    }
+  ]
+}

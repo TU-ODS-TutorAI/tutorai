@@ -28,6 +28,7 @@ class ISISWebdriver():
         self.pw = None
         self.isLoggedIn = False
         self.data = {}
+        self.foren = None
         self.driver = self.getDriver()
 
     def getDriver(self):
@@ -100,6 +101,7 @@ class ISISWebdriver():
 
     def search_course(self, course):
         search_box = self.driver.find_element_by_id("navsearchbox")
+        time.sleep(2)
         search_box.send_keys(course)
         search_box.submit()
         time.sleep(4)
@@ -107,8 +109,8 @@ class ISISWebdriver():
         search_result = self.driver.find_element_by_class_name("aalink")
         search_result.click()
 
-        self.course = {course:{"name":course,"link":self.driver.current_url}}
-        self.courseName = course
+        self.course = {"name":course,"link":self.driver.current_url,"messages":[]}
+        #self.courseName = course
         time.sleep(3)
 
 
@@ -119,24 +121,28 @@ class ISISWebdriver():
         title = self.driver.find_element_by_class_name("discussionname")
         title = title.text
         content = self.driver.find_elements_by_class_name("post-content-container")
-        links = self.driver.find_elements_by_class_name("btn.btn-link")
+        #links = self.driver.find_elements_by_class_name("btn.btn-link")
+        links = self.driver.find_elements_by_link_text("Dauerlink")
+        #print(test[0].get_attribute("href"))
         #print(links[0].get_property('attributes')[0])
         messages = []
         counter = 0
 
         for message in content:
-            messages.append({"text":message.text,"answers_in_thread":len(content),"tutor_answer_in_thread":"","link": links[counter].get_attribute('baseURI')})
+            text = message.text
+            text = text.replace("\n"," ")
+            messages.append({"text":text,"answers_in_thread":len(content),"tutor_answer_in_thread":"","link": links[counter].get_attribute("href")})
             counter += 1
-        data = {'title': title, 'posts': messages}
+        #data = {'title': title, 'posts': messages}
         self.driver.back()
-        return data
+        return messages
 
 
     def clickLink(self):
         time.sleep(3)
-        forum = self.course[self.courseName]["forum"]
+        #forum = self.course[self.courseName]["forum"]
         counter = 0
-        for f in forum:
+        for f in self.foren:
             #link = self.driver.find_element_by_link_text(f["name"])
             link = self.driver.get(f["link"])
             #link.click()
@@ -144,12 +150,14 @@ class ISISWebdriver():
 
             liste = self.driver.find_elements_by_class_name("w-100.h-100.d-block")
 
-            self.course[self.courseName]["forum"][counter]["entry"] = []
-            for i in range(len(liste)):
+            #self.course[self.courseName]["forum"][counter]["entry"] = []
+            #for i in range(len(liste)):
+            for i in range(0,3):
                 time.sleep(3)
                 liste = crowler.driver.find_elements_by_class_name("w-100.h-100.d-block")
                 liste[i].click()
-                self.course[self.courseName]["forum"][counter]["entry"].append(self.getData())
+                #self.course[self.courseName]["forum"][counter]["entry"].append(self.getData())
+                self.course["messages"].extend(self.getData())
                 time.sleep(2)
 
             self.driver.back()
@@ -157,15 +165,17 @@ class ISISWebdriver():
 
     def getForenFromCourse(self,key):
         allActivities = self.driver.find_elements_by_class_name("aalink")
+        self.foren = []
 
-        self.course[key]["forum"] = []
+        #self.course[key]["forum"] = []
 
         for activities in allActivities:
             ac_link = activities.get_attribute('href')
 
             if "forum" in ac_link:
                 ac_name = activities.find_element_by_class_name("instancename").text
-                self.course[key]["forum"].append({"name":ac_name,"link":ac_link})
+                #self.course[key]["forum"].append({"name":ac_name,"link":ac_link})
+                self.foren.append({"name":ac_name,"link":ac_link})
 
 
 
@@ -175,24 +185,26 @@ if __name__ == "__main__":
     #course = "IntroProg"
     #foren = ["Nachrichtenforum","C-Kurs","Offenes Forum","IntroProg"]
 
-    course = ["WS 19/20 ODS Einführung in die Programmierung"]
+    course = ["WS 20/21 ODS Einführung in die Programmierung","WS 19/20 ODS Einführung in die Programmierung"]
+    course_name = ["2021 Einfuehrung Programmierung", "1920 Einfuehrung Programmierung"]
 
     #foren = ["C-Kurs", "Offenes Forum", "Häufig gestellte Fragen und technische Fragen zu Hausaufgaben und Vorlesungen im Semester","Nachrichtenforum"]
-    crowl_data = {}
     crowler = ISISWebdriver(url, user_agend)
 
     while crowler.isLoggedIn == False:
         crowler.login()
 
+    c = 0
     for course in course:
-        crowl_data[course] = {}
+        crowler.course = None
         crowler.search_course(course)
         crowler.getForenFromCourse(course)
         crowler.clickLink()
-        crowl_data[course] = crowler.course
+        crowl_data = crowler.course
 
-    with open('dataISIS.json', 'w') as outfile:
-        json.dump(crowl_data, outfile)
+        with open(f'{course_name[c]}.json', 'w') as outfile:
+            json.dump(crowl_data, outfile)
+        c += 1
 
     print("JSON Created ................")
 
