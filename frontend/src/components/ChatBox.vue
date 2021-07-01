@@ -45,7 +45,7 @@ export default {
   created() {
     axios({
       method: "GET",
-      url: `http://localhost:3000/moses`,
+      url: `http://tutorai.ddns.net:3000/moses`,
     }).then(
       (result) => {
         this.modules = result.data.modules.sort(function (a, b) {
@@ -62,7 +62,7 @@ export default {
       this.messages.push({ msg: message, right: true });
       axios({
         method: "GET",
-        url: `http://localhost:5000/tutorai/classic/${message}/${this.selected}`,
+        url: `http://tutorai.ddns.net:5000/tutorai/classic/${message}/${this.selected}`,
       }).then(
         (result) => {
           this.messages.push({ msg: result.data.answer, right: false });
