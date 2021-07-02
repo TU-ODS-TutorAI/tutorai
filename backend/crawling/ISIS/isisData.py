@@ -120,19 +120,25 @@ class ISISWebdriver():
         time.sleep(2)
         #title = self.driver.find_element_by_class_name("discussionname")
         #title = title.text
-        content = self.driver.find_elements_by_class_name("post-content-container")
+        #content = self.driver.find_elements_by_class_name("post-content-container")
         #links = self.driver.find_elements_by_class_name("btn.btn-link")
-        links = self.driver.find_elements_by_link_text("Dauerlink")
+        #links = self.driver.find_elements_by_link_text("Dauerlink")
         #print(test[0].get_attribute("href"))
         #print(links[0].get_property('attributes')[0])
+        container = self.driver.find_elements_by_class_name("d-flex.body-content-container")
+
         messages = []
         counter = 0
 
-        for message in content:
-            text = message.text
+        for content in container:
+            text_elem = content.find_element_by_class_name("post-content-container")
+            text = text_elem.text
             text = text.replace("\n"," ")
+
+            link_elem = content.find_element_by_link_text("Dauerlink")
+            link = link_elem.get_attribute("href")
             if text != "+1":
-                messages.append({"text":text,"answers_in_thread":len(content),"tutor_answer_in_thread":"","link": links[counter].get_attribute("href")})
+                messages.append({"text":text,"answers_in_thread":len(container),"tutor_answer_in_thread":"","link": link})
                 counter += 1
         #data = {'title': title, 'posts': messages}
         self.driver.back()
