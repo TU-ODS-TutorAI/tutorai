@@ -118,8 +118,8 @@ class ISISWebdriver():
 
     def getData(self):
         time.sleep(2)
-        title = self.driver.find_element_by_class_name("discussionname")
-        title = title.text
+        #title = self.driver.find_element_by_class_name("discussionname")
+        #title = title.text
         content = self.driver.find_elements_by_class_name("post-content-container")
         #links = self.driver.find_elements_by_class_name("btn.btn-link")
         links = self.driver.find_elements_by_link_text("Dauerlink")
@@ -131,8 +131,9 @@ class ISISWebdriver():
         for message in content:
             text = message.text
             text = text.replace("\n"," ")
-            messages.append({"text":text,"answers_in_thread":len(content),"tutor_answer_in_thread":"","link": links[counter].get_attribute("href")})
-            counter += 1
+            if text != "+1":
+                messages.append({"text":text,"answers_in_thread":len(content),"tutor_answer_in_thread":"","link": links[counter].get_attribute("href")})
+                counter += 1
         #data = {'title': title, 'posts': messages}
         self.driver.back()
         return messages
@@ -144,21 +145,36 @@ class ISISWebdriver():
         counter = 0
         for f in self.foren:
             #link = self.driver.find_element_by_link_text(f["name"])
-            link = self.driver.get(f["link"])
-            #link.click()
+            """if "IntroProg" in f["name"]:
+                self.driver.get(f["link"])
+                time.sleep(3)
+            else:
+                pass"""
+
+            self.driver.get(f["link"])
             time.sleep(3)
 
             liste = self.driver.find_elements_by_class_name("w-100.h-100.d-block")
 
             #self.course[self.courseName]["forum"][counter]["entry"] = []
-            #for i in range(len(liste)):
-            for i in range(0,3):
-                time.sleep(3)
-                liste = crowler.driver.find_elements_by_class_name("w-100.h-100.d-block")
-                liste[i].click()
-                #self.course[self.courseName]["forum"][counter]["entry"].append(self.getData())
-                self.course["messages"].extend(self.getData())
-                time.sleep(2)
+            #page_link = self.driver.find_element_by_link_text("Next")
+
+            while True:
+                liste = self.driver.find_elements_by_class_name("w-100.h-100.d-block")
+                for i in range(len(liste)):
+                    time.sleep(3)
+                    liste = self.driver.find_elements_by_class_name("w-100.h-100.d-block")
+                    print(i,len(liste))
+                    liste[i].click()
+                    #self.course[self.courseName]["forum"][counter]["entry"].append(self.getData())
+                    self.course["messages"].extend(self.getData())
+                    time.sleep(2)
+                try:
+                    next_link = self.driver.find_element_by_css_selector("[aria-label=Next]")
+                    next_link.click()
+                except:
+                    break
+
 
             self.driver.back()
             counter += 1
