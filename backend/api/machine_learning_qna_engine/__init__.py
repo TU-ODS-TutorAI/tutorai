@@ -1,4 +1,5 @@
 import json
+import requests
 from transformers import pipeline
 import openai
 import os
@@ -27,6 +28,24 @@ def get_answer(question: str, context: str) -> str:
     return response
 
 
+def get_answer_with_module_number(question: str, module_number: int) -> str:
+    response = get_module_data_from_moses(module_number)
+
+    return get_answer(question, str(response.json()))
+
+
+def get_module_data_from_moses(module_number):
+    try:
+        response = requests.get(f"http://tutorai.ddns.net:3000/Moses/{module_number}")
+    except requests.exceptions.RequestException as e:
+        SystemError(e)
+    if response.status_code != 200:
+        print(
+            f"ERROR when trying to fetch moses module data for module number {module_number}. Status Code: {response.status_code}")
+        exit(1)
+    return response
+
+
 def bert_question_answerer(question, context):
     question_answerer = pipeline('question-answering')
 
@@ -48,7 +67,6 @@ def gpt3_question_answerer(question, context):
     question_sequence = "\n\nQ: " + question
     answere_sequence = "\nA: "
 
-    print(context + question_sequence + answere_sequence)
     response = openai.Completion.create(
         engine="davinci",
         prompt=context + question_sequence + answere_sequence,
@@ -59,7 +77,6 @@ def gpt3_question_answerer(question, context):
         presence_penalty=0.0,
         stop=["\n"]
     )
-    print(response["choices"][0]["text"])
 
     return response["choices"][0]["text"]
 

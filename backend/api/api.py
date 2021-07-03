@@ -23,6 +23,13 @@ def machine_learning_question_answering_api(question, context):
     return jsonify(answer=answer)
 
 
+@app.route("/tutorai/machine_learning_with_module/<question>/<module_number>", methods=["GET"])
+def machine_learning_question_answering_api_with_module(question, module_number):
+
+    answer = machine_learning_qna_engine.get_answer_with_module_number(str(question), int(module_number))
+    print("ANSWER "+ answer)
+    return jsonify(answer=answer)
+
+
 if __name__ == '__main__':
-    print(config["server_config"])
     app.run(host=config["server_config"]["host"], port=config["server_config"]["port"])
