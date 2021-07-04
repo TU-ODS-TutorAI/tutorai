@@ -208,7 +208,7 @@ if __name__ == "__main__":
     #foren = ["Nachrichtenforum","C-Kurs","Offenes Forum","IntroProg"]
 
     course = ["WS 20/21 ODS Einführung in die Programmierung","WS 19/20 ODS Einführung in die Programmierung"]
-    course_name = ["2021 Einfuehrung Programmierung", "1920 Einfuehrung Programmierung"]
+    course_name = ["2021_Einfuehrung_Programmierung", "1920_Einfuehrung_Programmierung"]
 
     #foren = ["C-Kurs", "Offenes Forum", "Häufig gestellte Fragen und technische Fragen zu Hausaufgaben und Vorlesungen im Semester","Nachrichtenforum"]
     crowler = ISISWebdriver(url, user_agend)
