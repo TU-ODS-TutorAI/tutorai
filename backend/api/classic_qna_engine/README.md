@@ -4,10 +4,12 @@ First install all dependencies
 * For UNIX/macOS
     1. run `pip3 install -r requirements.txt`
     2. additionally run `pip3 install -U textblob` and `python3 -m textblob.download_corpora`
+    3. additionally run `pip3 install -U sentence-transformers`
 
 * For Windows
     1. run `py -m pip3 install -r requirements.txt`
     2. additionally run `pip3 install -U textblob` and `python3 -m textblob.download_corpora`
+    3. additionally run `pip3 install -U sentence-transformers`
     
 Next make sure to start backend
 * in tutorai/backend/crawling/ run `npm start`

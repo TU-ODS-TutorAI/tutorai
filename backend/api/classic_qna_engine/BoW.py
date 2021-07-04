@@ -9,7 +9,8 @@ from HanTa import HanoverTagger as ht
 
 class BagWords:
 
-    def __init__(self, language):
+    def __init__(self, language, version: int):
+        self.version = version
         self.language = language
         self.vocabulary = []
         self.matrix = []
@@ -39,7 +40,7 @@ class BagWords:
 
             for lemma in lemmata:
                 if(lemma[2] == "NN" or lemma[2] == "NE" or lemma[2].startswith("ADJ") or lemma[2].startswith("VV")):
-                    if((lemma[2] == "NN" or lemma[2] == "NE") and self.language == "de"):
+                    if((lemma[2] == "NN" or lemma[2] == "NE") and self.language == "german"):
                         compounds = doc_split.maximal_split(lemma[0])
                         for compound in compounds:
                             compound = compound.replace("-", "")
@@ -107,14 +108,17 @@ class BagWords:
         """
         self.matrix = []
         # add all sentences to vocabulary
-
-        for i in range(len(self.texts)):
-            if not isinstance(self.texts[i], list):
-                self.texts[i] = self.str_2_vec(self.texts[i])
+        
+        if(self.version == 1):
+            for i in range(len(self.texts)):
+                if not isinstance(self.texts[i], list):
+                    self.texts[i] = self.str_2_vec(self.texts[i])
+                    self.create_vocabulary(self.texts[i])
+        else:
+            for i in range(len(self.texts)):
                 self.create_vocabulary(self.texts[i])
-
+        
         # calculate matrix
-        j = 1
         for text in self.texts:
             vec = self.calculate_vec(text)
             self.matrix.append(vec)

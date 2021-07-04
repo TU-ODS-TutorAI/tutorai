@@ -3,6 +3,7 @@
 import difflib
 import nltk
 nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
 from HanTa import HanoverTagger as ht
 from . import alternativeKeys as aK
