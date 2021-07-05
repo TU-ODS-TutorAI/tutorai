@@ -1,5 +1,8 @@
 {
     "hey": "Hallo",
     "wer": "Ich bin der Kleine_Bot",
-    "help": "Ich kann:\n!help: Hier erkl\u00e4re ich dir meine Funktionen.\n!volltext: Ich finde dir alle Module mit einem bestimmten Wort, auch wenn sie anders Konjugiert sind\n!tutorien: Ich schicke dir alle Tutorien"
+    "help": "Ich kann:\n!help: Hier erkl\u00e4re ich dir meine Funktionen.\n!volltext: Ich finde dir alle Module mit einem bestimmten Wort, auch wenn sie anders Konjugiert sind\n!tutorium: Ich schicke dir alle Tutorien\n!rechner\u00fcbung: ich zeige die Nochmal den zoom-Link zur Rechner\u00fcbung, falls du ihn vergessen haben solltest\n!vorlesung gibt die direkt einen Link zu deiner Liebsten Tu-Veranstaltung",
+    "tutorium": "\n\tMontag\n\tDienstag\n\tMittwoch\n\tDonnerstag\n\tFreitag\n8-10\n\tsehr Lang\n\tMittel\n\tKurz\n\tnicht besetzt\n\tMittel\n10-12\n\tLang\n\tKurz\n\tKurz\n\tVorlesung\n\tLang\n12-14\n\tLang\n\tKurz\n\tKurz\n\tMittel\n\tLang\n14-16\n\tsehr Lang\n\tKurz\n\tKurz\n\tMittel\n\tLang\n16-18\n\tsehr Lang\n\tKurz\n\tKurz\n\tnicht besetzt\n\tLang\n18-20\n\tsehr Lang\n\tKurz\n\tKurz\n\tnicht besetzt\n\tLang",
+    "rechner\u00fcbung": "https://tu-berlin.zoom.us/j/69936755346?pwd=WVY4UzkyVkplNGFDN2RlaUcyYXcydz09",
+    "vorlesung": "https://tu-berlin.zoom.us/j/65756788175?pwd=RXVWcDBEMVVHV01TQkFvQ05lTUxVUT09#success"
 }

@@ -12,7 +12,7 @@ PASSWORD = "MatrixBotPasswort123"
 SERVER = "https://matrix-client.matrix.org"
 NEO4JPASSWORD = "TUTORAI"
 neo4j = Graph("bolt://localhost:7687", auth=("neo4j", NEO4JPASSWORD))
-nlp = spacy.load("de_core_news_lg")
+nlp = spacy.load("de_dep_news_trf")
 with open('Preset_Config.json') as json_file:
     presetConfig = json.load(json_file)
 LANGUAGE = 1
@@ -98,9 +98,46 @@ async def bot_callback_uncalled(room, event):
 
 
 # Handles an isis search
-def isis_suche(room, event):
-    print("not yet implemented")
+async def isis_suche(room, message):
+    question = nlp(message.body[6:])
+    #print(message.body)
+    #print(message.body[6:])
+    for q in question:
+        print(q.text, q.pos_)
+    answer = ""
+    key = []
+    for i in range(1000):
+        key.append(0)
 
+    for word in question:
+        # pc suche
+        # set suche
+        if word.pos_ == "NOUN" or word.pos_ == "VERB" or word.pos_ == "PROPN":
+            # for data in neo4j.run(f"match (a:{word.pos_} {{word:'{word.text}'}})-[:text]->(t) return t.data").data():
+            #     print(data['t.data'])
+            for data in neo4j.run(
+                    f"match (k:keyword)<-[:KEYSUB]-(ks:subkeyword {{data:'{word.text.lower()}'}}) return ID(k)").data():
+                key[data['ID(k)']] += 1
+
+            for data2 in neo4j.run(
+                    f"match (w:{word.pos_} {{data:'{word.text.lower()}'}})-[r:TEXT]->(t) return t.data").data():
+                answer += data2['t.data']
+            # data = neo4j.run(f"match (k:subkeyword {{data:'{word.text}'}})-[:KEYSUB]->(t) return ID(t)").data()
+            # keycount = neo4j.run(f"match (p)<-[:SET]-(w) where id(p) = {data['ID(t)']} return count(w)").data()[0]['count(w)']
+            # if data:
+            #     if len(data) == neo4j.run(f"match (p)<-[]-(w) where id(p) = {data[0]['ID(t)']} return count(w)").data()[0]['count(w)']:
+            #         print(data[0]['t.data'])
+    for i in range(1000):
+        if key[i] != 0:
+            for data in neo4j.run(
+                    f"match (s:set)<-[:SET]-(k:keyword)<-[:KEYSUB]-(ks:subkeyword) where ID(k) = {i} return count(ks), s.data").data():
+                if key[i] >= data['count(ks)']:
+                    answer += data['s.data']
+
+    if answer:
+        await mutil.send_notice_message(bot, room.room_id, answer+"\n")
+    else:
+        await mutil.send_notice_message(bot, room.room_id, 'Leider war die Suche Erfolglos')
 
 # Event_Handlers und Main Thread
 # Handles all the preset ways the bot interacts
@@ -113,7 +150,7 @@ async def bot_callback_preset(room, message):
         elif match.command("volltext_klassik"):
             await volltextsuche_moses(room, message)
         elif match.command("isis"):
-            isis_suche(room, message)
+            await isis_suche(room, message)
         elif match.command("echo"):
             await mutil.send_notice_message(bot, room.room_id, message.body)
         else:

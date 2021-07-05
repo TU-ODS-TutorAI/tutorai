@@ -1,0 +1,586 @@
+Dieser Kurs ist eine Pflichtveranstaltung in den Bachelor Studiengängen: (1) Informatik, (2) Technische Informatik, (3) Medieninformatik und (4) Medientechnik.
+--!--
+--P--
+Das Modul besteht aus den folgenden prüfungsrelevanten Bestandteilen:
+--C--
+    Montag, 2. November - Freitag, 13. November 2020: C-Kurs eine Blockveranstaltung mit täglichen Online-Veranstaltungen, live jeweils 12 bis 14 Uhr.
+--C--
+    Ab Montag, 16. November: Wöchentliche Vorlesung und Hausaufgabe bis Semesterende. Die Vorlesung findet jeweils Donnerstags, 10 bis 12 Uhr als Live-Online-Veranstaltung statt.
+    (Hinweis: Weder der C-Kurs noch die Vorlesungen für "Einführung in die Programmierung" können als Aufzeichnungen zur Verfügung gestellt werden.)
+--C--
+    Am 18.03.2021: Klausur 15-17 Uhr
+--!--
+Für dringende organisatorische Anliegen erreichst Du uns per E-Mail via introprog@ods.tu-berlin.de - am besten von Deiner TU-Adresse aus.
+--!--
+Dieser Kurs ist eine Pflichtveranstaltung in den Bachelor Studiengängen: (1) Informatik, (2) Technische Informatik, (3) Medieninformatik und (4) Medientechnik.
+--!--
+Das Modul besteht aus den folgenden prüfungsrelevanten Bestandteilen:
+--!--
+    Montag, 2. November- Freitag, 13. November 2020: C-Kurs eine Blockveranstaltung mit täglichen Online-Veranstaltungen, live jeweils 12 bis 14 Uhr.
+--!--
+    Ab Montag, 16. November: Wöchentliche Vorlesung und Hausaufgabe bis Semesterende. Die Vorlesung findet jeweils Donnerstags, 10 bis 12 Uhr als Live-Online-Veranstaltung statt.
+--!--
+    (Hinweis: Weder der C-Kurs noch die Vorlesungen für "Einführung in die Programmierung" können als Aufzeichnungen zur Verfügung gestellt werden.)
+--!--
+    Am 18.03.2021: eKlausur 15-17 Uhr
+--!--
+Für dringende organisatorische Anliegen erreichst Du uns per E-Mail via introprog@ods.tu-berlin.de - am besten von Deiner TU-Adresse aus.
+--!--
+--P--
+Lernziele
+--C--
+• Kenntnisse
+    - elementarer Datenstrukturen
+    - elementarer Such -und Sortierverfahren
+--C--
+• Fähigkeiten
+    - Probleme und Strukturen (wieder) zu erkennen
+    - für ein gegebenes Anwendungsproblem die geeignete Datenstruktur zu wählen
+    - den Aufwand (Komplexität) eines Algorithmus bzw. eines C-Programms abzuschätzen
+--!--
+--S--
+Insertion Sort
+--D--
+Insertion Sort(Array A)
+1.for j <- 2 to length(A) do
+2.  key <- A[j]
+3.  i <- j-1
+4.  while i>0 and A[i]>key do
+5.      A[i+1] <- A[i]
+6.      i <- i-1
+7.  A[i+1] <- key
+
+Idee Insertion Sort
+    •Die ersten j-1 Elemente sind sortiert (zu Beginn j=2)
+    •Innerhalb eines Schleifendurchlaufs wird das j-te Element in die sortierte Folge eingefügt
+    •Am Ende ist die gesamte Folge sortiert
+--!--
+--S--
+Bubble Sort
+--D--
+Idee Bubble Sort:
+    •Die letzten Elemente von j bis n sind sortiert (zu Beginn j= n-1)
+    •Die größten Elemente steigen auf (bubblen), wie Luftblasen, die zu ihrer richtigen Position aufsteigen
+    •Am Ende ist die gesamte Folge sortiert
+
+Bubble Sort(Array A)
+1.for j <- length(A) -1 downto 1 do
+2.  for i <- 1 to j do
+3.      if A[i] > A[i+1] thenswap(A, i, i+1)
+--!--
+--S--
+Mergesort
+--D--
+Idee Mergesort:
+    • Teile & Herrsche (Divide & Conquer)
+    • Teile Eingabe in mehrere Teile auf
+    • Löse das Problem rekursiv auf den Teilen
+    • Füge die Teillösungen zu einer Gesamtlösung zusammen
+    Hinweise:
+    • Wir benötigen Rekursionabbruch
+    • Für sortieren: Folgen der Länge 1 sind sortiert
+
+MergeSort(Array A, p, r)
+1. if p< r then
+2.  q <- (p+r)/2
+3.  MergeSort(A,p,q)
+4.  MergeSort(A,q+1,r)
+5.  Merge(A,p,q,r)
+--!--
+--S--
+Quicksort
+--D--
+Idee Quicksort
+    • Zerlegen einer Folge in zwei Teilfolgen, wovon die eine die
+      kleineren (<) Elemente, die andere die größeren (≥)
+      Elemente enthält
+    • Als Trennwert pivot wird oft der Wert des ersten Elements
+      genommen.
+    • Statt des Vertauschens (swap) werden die Elemente in zwei
+      neue Listen (links und rechts) versetzt (move).
+    • Diese werden dann rekursiv sortiert und zu der Resultatliste
+      zusammengesetzt.
+    • Die Komplexität des nachfolgenden Gruppierungsverfahrens ist,
+      wie bei den Arrays, O(n), da die Liste genau einmal abgelaufen
+      wird und jeweils konstanter Aufwand entsteht.
+
+QuickSort ( list to sort )
+1. // Abbruchbedingung
+2. if ( tosort.first == tosort.last )
+3.      return
+4. else
+5.      list left,right
+6.      pivot <- Partition(tosort, left, right)
+7.      // Rekursion
+8.      QuickSort (left)
+9.      QuickSort (right)
+10.     // Listen zusammenfügen
+11.     if ( left.first == NULL )
+12.         tosort.first <- pivot
+13.     else
+14.         tosort.first <- left.first
+15.         left.last.next <- pivot
+16.     if ( right.first == NULL )
+17.         pivot.next <- NULL
+18.         tosort.last <- pivot
+19.     else
+20.         pivot.next <- right.first
+21.         tosort.last <- right.last
+--!--
+--S--
+Selection Sort
+--D--
+SelectionSort(Array A)
+1. for j ←1 to length(A) - 1 do
+2.   min ← j
+3.   for i ← j + 1 to length(A) do
+4.      if A[i] < A[min] then min ← i
+5.   h ← A[min]
+6.   A[min] ← A[j]
+7.   A[j] ← h
+--!--
+--S--
+Countsort
+--D--
+Idee Countsort
+      Annahmen:
+    • Eingabegröße n
+    • length(A) = n
+    • Wertebereich von A: 1 – m
+    • length(C) = m
+    • Zähle, wie häufig jedes Element vorkommt
+    • Füge jedes Element der Reihe nach entsprechend seiner
+      Häufigkeit in das Array hinein.
+
+CountSort(Array A)
+1. C ist Hilfsarray mit 0 initialisiert
+2. for j <-1 to length(A) do
+3.      C[ A[j] ] <- C[ A[j] ] + 1
+4. k <- 1
+5. for j <- 1 to length(C) do
+6.      for i <- 1 to C[j] do
+7.          A[k] <- j
+8.          k <- k + 1
+--!--
+--S--
+Stack,Stapel
+--D--
+• Stack: Datenstruktur, welche effizientes Entfernen in der
+umgekehrten Einfügereihenfolge ermöglicht.
+− Last-In-First-Out (LIFO)
+First-In-Last-Out (FILO) Datenstruktur.
+− Methoden: push/pop
+--!--
+--S--
+Queue,Warteschlange
+--D--
+Queue: Datenstruktur, welche effizientes Entfernen in der
+Einfügereihenfolge ermöglicht.
+− First-In-First-Out (FIFO) Datenstruktur.
+− Zugriff durch Methoden enqueue/dequeue realisiert.
+--!--
+--S--
+Static Array Laufzeit,Statische Arrays Laufzeit
+--D--
+Element Access O(1)
+Insert at begin O(n)
+Insert at end O(n)
+Insert at known position O(n)
+Extra space 0
+--!--
+--S--
+Dynamic Array Laufzeit,Dynamische Arrays Laufzeit
+--D--
+Element Access O(1)
+Insert at begin O(n)
+Insert at end O(1)
+Insert at known position O(n) O(n)
+Extra space O(n)
+--!--
+--S--
+Linked List Laufzeit
+--D--
+Element Access O(n)
+Insert at begin O(1)
+Insert at end O(1)
+Insert at known positionO(1)
+Extra space O(n)
+--!--
+--S--
+Idee Binäre Suche
+--D--
+    - Vergleiche Element b mit dem mittleren Element des Feldes
+      Wenn gefunden, gib Feldindex zurück
+    - Wenn kleiner, dann suche rekursiv im linken Teilfeld
+    - Wenn größer, dann suche rekursiv im rechten Teilfeld
+--!--
+--S--
+Binäre Suche
+--D--
+BinäreSuche(A,b,p,r)
+1. if p=r then return p
+2. else
+3.  q <- (p+r)/2
+4. if b £ A[q] then return BinäreSuche(A,b,p,q)
+5. else return BinäreSuche(A,b,q+1,r)
+--!--
+--S--
+Integer Multiplikation,Binäre Multiplikation,Binärmultiplikation
+--D--
+Schulmethode: (13∙11)
+1101 ∙ 1011
+       1101
+      1101
+    1101
+   10001111
+--!--
+--S--
+Binärbaum,Suchbaum,Binarer Suchbaum
+--D--
+• Schlüssel key und ggf. weitere Daten
+• Zeiger lc(v) (rc(v)) auf linkes (rechtes) Kind von v
+• Elterzeiger p(v) auf Elter von v (blau)
+• Wurzelzeiger root(T) auf die Wurzel des Baums T
+
+Baumsuche(x,k)
+1. if x=nil or k=key(x) then return x
+2. if k<key(x) then return Baumsuche(lc(x),k)
+3. else return Baumsuche(rc(x),k)
+
+IterativeBaumsuche(x,k)
+1. while x  nil and k  key(x) do
+2. if k < key(x) then x  lc(x)
+3. else x  rc(x)
+4. return x
+--!--
+--S--
+AVL
+--D--
+• Ein binärer Suchbaum heißt AVL-Baum, wenn für jeden
+  Knoten gilt: Die Höhe seines linken und rechten
+  Teilbaums unterscheidet sich höchstens um 1.
+--!--
+--S--
+Baum Rotation,Rotation,Linksrotation
+--D--
+Linksrotation(x)
+1. y ¬ rc[x]
+2. rc[x] ¬ lc[y]
+3. if lc[y]¹nil then p[lc[y]] ¬ x
+4. p[y] ¬ p[x]
+5. if p[x]=nil then root[T] ¬ y
+6. else if x=lc[p[x]] then lc[p[x]] ¬ y
+7. else rc[p[x]] ¬ y
+8. lc[y] ¬ x
+9. p[x] ¬ y
+--!--
+--S--
+Baum Balance,Balance
+--D--
+Balance(y)
+1. if h[lc[y]] > h[rc[y]]+1 then
+2.      if h[lc[lc[y]]]< h[rc[lc[y]]] then
+3.          Linksrotation(lc[y])
+4.      Rechtsrotation(y)
+5. else if h[rc[y]]> h[lc[y]]+1 then
+6.      if h[rc[rc[y]]]< h[lc[rc[y]] then
+7.          Rechtsrotation(rc[y])
+8.      Linksrotation(y)
+--!--
+--S--
+Baum Einfügen,AVL Einfügen
+--D--
+AVL-Einfügen(t,x)
+1. if t=nil then
+2. t <- new node(x); h[t]¬0 ; return
+3. else if x<key[t] then AVL-Einfügen(lc[t],x)
+4. else if x>key[t] then AVL-Einfügen(rc[t],x)
+5. else return  >> Schlüssel schon vorhanden
+6. h[t] <- 1 + max{h[lc[t]], h[rc[t]]}
+7. Balance(t)
+--!--
+--S--
+Baum Löschen
+--D--
+AVL-Löschen(t,x)
+01. if t=nil then return Ø x nicht im Baum
+02. else if x<key[t] then AVL-Löschen(lc[t],x)
+03. else if x>key[t] then AVL-Löschen(rc[t],x)
+04. else if lc[t]=nil then ersetze t durch rc[t]
+05. else if rc[t]=nil then ersetze t durch lc[t]
+06. else u=MaximumSuche(lc[t])
+07.         Kopiere Informationen von u nach t
+08.         AVL-Löschen(lc[t],key[u])
+09. if t¹nil then h[t] = 1 + max{h[lc[t]], h[rc[t]]}
+10. Balance(t)
+--!--
+--S--
+Baum Traversieren,Traversieren,Baum Durchlaufen
+--D--
+• Pre-order: Knoten -> Links -> Rechts
+• Post-order: Links -> Rechts -> Knoten
+• In-order: Links -> Knoten -> Rechts
+• Level-order: Schicht nach Schicht von der Wurzel aus
+
+Inorder-Tree-Walk(x)
+1. if x  nil then
+2. Inorder-Tree-Walk(lc(x))
+3. Ausgabe key(x)
+4. Inorder-Tree-Walk(rc(x))
+
+--!--
+--S--
+Bäume,Baum
+--D--
+• Abbildung von Daten in einer Baumstruktur
+    - Natürliche Ordnung der Daten.
+    - Für effiziente Verarbeitung: O(log(n)) anstelle von O(n)
+• Vier Haupttypen der Traversierung
+    - Implementierbar: Rekursiv, stack/queue
+• Suchbäume ermöglichen das Suchen in O(log(n))
+    - Zusätzlicher Aufwand notwendig, um den Baum beim Einfügen,
+      Löschen balanciert zu halten
+--!--
+--S--
+Heapsort
+--D--
+Idee Heap Sort:
+• Abstrakte Datenstruktur
+    - Basiert meist auf einem Baum
+    - Jedes Element hat einen Schlüssel (häufig die Elemente selbst),
+      das die Priorität des Elements festlegt
+    - Partiell geordneter Baum
+
+Schlüssel:
+    • Wurzel: 1
+    • Parent(i): i/2 abgerundet
+    • Left(i): 2i
+    • Right(i): 2i+1
+
+Heapsort(A)
+1. Build-Heap(A)
+2. for i ¬ length(A) downto 2 do
+3. A[1] « A[i]
+4. heap-size(A) ¬ heap-size(A)-1
+5. Heapify(A,1)
+--!--
+--S--
+Radix Sort
+--D--
+Idee Radix Sort:
+− Wir wenden count sort nacheinander auf die Stellen der
+  Werte an
+− Begonnen wird bei der kleinsten signifikanten Stelle
+− Da count sort stabil ist, bleibt die Ordnung bezüglich der
+  weniger signifikanter Stellen erhalten
+--!--
+--S--
+Heapify
+--D--
+Heapify
+    Voraussetzung:
+    • Die Teilarrays mit Wurzel Left(i) und Right(i) sind Heaps
+    • A[i] ist aber evtl. kleiner als seine Kinder
+    Heapify(A,i) lässt i „absinken“, so dass die Heap Eigenschaft
+    erfüllt wird
+
+Heapify(A,i)
+1. l <- left(i)
+2. r <- right(i)
+3. if l £ heap-size(A) and A[l] > A[i] then largest <- l
+4. else largest <- i
+5. if r £ heap-size(A) and A[r] > A[largest] then largest <- r
+6. if largest != i then A[i] <- A[largest]
+7. Heapify(A,largest)
+--!--
+--S--
+Build Heap
+--D--
+Build-Heap(A)
+1. heap-size(A) <- length(A)
+2. for i <- abrunden(length(A)/2) downto 1 do
+3. Heapify(A,i)
+--!--
+--S--
+Heap Einfügen
+--D--
+Heap-Insert(A,key)
+1. heap-size(A) <- heap-size(A)+1
+2. i <- heap-size(A)
+3. while i>1 and A[Parent(i)] < key do
+4. A[i] <- A[Parent(i)]
+5. i <- Parent(i)
+6. A[i] <- key
+--!--
+--S--
+Schleifeninvariante,Invariante
+--D--
+Definition Schleifeninvariante
+Eine Schleifeninvariante ist eine Aussage A(i), die
+• Zu Beginn des ersten Durchlaufs gilt (Initialisierung)
+• Zu Beginn des i-ten Schleifendurchlaufs gilt (in Abhängigkeit von i)
+  Und eine Aussage über den Zustand nach Ablauf der Schleife erlaubt, den
+  Austrittszustand zu bestimmen.
+--!--
+--S--
+Vollständige Induktion,Induktion
+--D--
+Zu zeigen: p: N0 → Boolean (Prädikat)
+            N0 = {0,1,..}
+• Induktionsanfang: Zu beweisen:
+           p(0) ist WAHR
+• Induktionsvoraussetzung: Für alle n element N0
+    , mit n <= n0 gilt:
+        p(n) ist WAHR
+• Induktionsschritt: Zu beweisen ist:
+        p(n) ist WAHR für n <= n0  p(n+1) ist WAHR
+• Induktionsschluss: Für alle n element N0 gilt
+        p(n) ist WAHR.
+--!--
+--S--
+Dateioperationen,Datei
+--D--
+• Erzeugen (create)
+• Schreiben (write)
+• Lesen (read)
+• Löschen (delete)
+• Öffnen/Schließen einer Datei (open/close)
+• …
+
+Siehe auch: fprintf, fscanf, fgets, sscanf, C-Streams, fclose
+--!--
+--S--
+fprintf
+--D--
+Aufruf: fprintf(FILE *stream, fmt, args)
+• fprintf() wie printf jedoch mit Dateien / Streams, d.h. konvertiert und
+  gibt die Parameter args unter Kontrolle des Formatstrings fmt auf
+  stream aus
+--!--
+--S--
+C-Streams
+--D--
+Jedes laufende C-Programm (= Prozess) hat voreingestellt drei Kanäle für
+Ein-/Ausgabe:
+− stdin Standardeingabe, meist Tastatur
+− stdout Standardausgabe, meist Bildschirm
+--!--
+--S--
+fscanf
+--D--
+Aufruf: fscanf(FILE *stream, fmt, args)
+• fscanf() liest von stream und versucht, die Eingabe unter Kontrolle
+  des Formatstrings fmt auf die Parameter args abzubilden
+  Beispiele: // fscanf(stdin, ...) entspricht scanf
+− int a, b; fscanf(stdin, “%d %d“, &a, &b);
+− float x; fscanf(stdin, “%f“, &x);
+− char a; fscanf(stdin, “%c“, &a);
+--!--
+--S--
+fclose
+--D--
+Aufruf: fclose(FILE *stream)
+• fclose() schließt den Stream stream
+• Fehlerfreies Beenden der Operationen
+• Gibt Ressourcen frei, u.a. im Betriebssystem
+Beispiel:
+− fclose(file_pointer_in);
+//schließt den Stream file_pointer_in
+--!--
+--S--
+fgets
+--D--
+Aufruf:
+char *fgets(char *buf, int n, FILE *stream)
+• fgets() liest bis zum ersten Newline „\n“ von stream, dabei aber
+  maximal n-1 Zeichen, und fügt \0 hinzu oder bis EOF (je nachdem welche
+  Bedingung als erste zutrifft)
+--!--
+--S--
+sscanf
+--D--
+char buf[200];
+int a, b;
+int ret = sscanf(buf, „%d %d“, &a, &b);
+if (ret == 2) {
+printf(„read 2 integers: %d %d\n“, a, b);
+} else {
+fprintf(stderr, „error reading 2 integers\n“);
+}
+--!--
+--S--
+Verkettete Listen,Linked List
+--D--
+• Verkettete Liste:
+    − Elemente bestehen aus Inhalt und Nachfolger.
+    − Jedes Element “verweist” auf seinen Nachfolger.
+    - Erstes Element wird oft „Wurzel“ (engl. „root“), „Anker“
+      oder „Kopf“ der Liste genannt
+
+Struct Definition oft mit Namenskonvention _typename
+/* Datentyp für einfach verkettete Liste */
+typedef struct _slist {
+int value; // Daten
+struct _slist *next; // Nachfolger
+} slist;
+
+Siehe auch: Liste Initialisieren, Liste Einfügen, Liste Ausgeben, Liste Element entfernen
+--!--
+--S--
+Liste Initialisieren
+--D--
+list * warenliste = calloc(1, sizeof(list));
+void init_list(list *list_pointer){
+    list_pointer->first = NULL;
+    list_pointer->count = 0;
+}
+init_list(warenliste);
+--!--
+--S--
+Liste Einfügen
+--D--
+list * warenliste = calloc(1, sizeof(list));
+void list_insert(list *list_pointer, int value){
+    list_el * new = (list_el *) calloc(1, sizeof(list_el));
+    new->value = value;
+    new->next = list_pointer->first;
+    list_pointer->first = new;
+    list_pointer->count++;
+}
+list_insert(warenliste, 100);
+--!--
+--S--
+Liste Ausgeben
+--D--
+list * warenliste = calloc(1, sizeof(list));
+    void list_print(list *list_pointer){
+    list_el *tmp = list_pointer->first;
+    while(tmp) {
+        printf(“cur: %d “, tmp->value);
+        tmp = tmp->next;
+    } printf(“\n“);
+}
+list_print(warenliste);
+--!--
+--S--
+Liste Element entfernen
+--D--
+• Beim Entfernen wird ein Element, dessen Position
+  bekannt ist, aus der Liste entfernt
+• Vorgänger verweist auf nachfolger des zu löschenden Elements
+• Dann Element Löschen
+--!--
+--S--
+Doppelt Verkettete Liste
+--D--
+Invertieren
+• Einfach verkettete Folgen können nicht in umgekehrter
+  Richtung durchlaufen werden.
+• Dazu kann bei Bedarf eine Operation „Invertieren"
+  angeboten werden.
+    − Zweimaliges Invertieren muss wieder die ursprüngliche Folge
+      ergeben.
+
+• Soll eine Folge in beiden Richtungen effizient
+  abgelaufen werden können, so ist eine
+  Doppelverzeigerung erforderlich.
