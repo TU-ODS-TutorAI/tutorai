@@ -82,7 +82,6 @@ def getContextAnswer(tokens, answers, sorted_idxs):
 def getLowestTf(tokens, answers):
     tf_tokens = []
     for token in tokens:
-        print(token)
         term_frequency = 0
         for answer in answers:
             answer = cleanAnswer(answer)
