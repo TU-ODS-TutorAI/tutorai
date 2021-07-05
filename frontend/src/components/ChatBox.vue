@@ -62,7 +62,10 @@ export default {
       this.messages.push({ msg: message, right: true });
       axios({
         method: "GET",
-        url: `http://tutorai.ddns.net:5000/tutorai/classic/${message}/${this.selected}`,
+        url: `http://tutorai.ddns.net:5000/tutorai/classic/${message.replace(
+          "?",
+          "%3F"
+        )}/${this.selected}`,
       }).then(
         (result) => {
           this.messages.push({ msg: result.data.answer, right: false });

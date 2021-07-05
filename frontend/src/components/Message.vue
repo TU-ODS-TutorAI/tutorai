@@ -3,14 +3,14 @@
     <div class="chat-r">
       <div class="sp"></div>
       <div class="mess mess-r">
-        <p>{{ msg }}</p>
+        <p v-for="(item, index) in msg.split('\n')" :key="index">{{ item }}</p>
       </div>
     </div>
   </div>
   <div v-else>
     <div class="chat-l">
       <div class="mess">
-        <p>{{ msg }}</p>
+        <p v-for="(item, index) in msg.split('\n')" :key="index">{{ item }}</p>
       </div>
       <div class="sp"></div>
     </div>
