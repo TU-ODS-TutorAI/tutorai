@@ -9,6 +9,8 @@ from HanTa import HanoverTagger as ht
 import spacy
 import matrix_util.matrix_util as mutil
 
+#threshold für Botantword zu Nachrichtenscore
+threshold = 0.0
 
 def score(chars, time):
     chars_sum = chars_for_score(chars)
@@ -314,7 +316,7 @@ async def new_message_handling(bot, message, room, neo4j, nlp):
     # print(json.dumps(event))
     # ev = neo4j.run(f"match (c:chat {{text:'{nachricht}'}})-[:EVENT]->(j) return j.string").data()
 
-    stringnlp = nlp(nachricht)
+    stringnlp = nlp(nachricht.lower())
     print(stringnlp)
 
     best = 0
@@ -322,7 +324,7 @@ async def new_message_handling(bot, message, room, neo4j, nlp):
     for query in neo4j.run("match (c:chat) return c.text").data():
         # spacy
         # Vergleich der Nachricht mit den Nachrichtden der Datenbank
-        querynlp = nlp(query['c.text'])
+        querynlp = nlp(query['c.text'].lower())
 
         # hier besseren Algorithmus zum Vergleich einfügen
         tmp = stringnlp.similarity(querynlp)  # Vergleichsscore
@@ -338,7 +340,8 @@ async def new_message_handling(bot, message, room, neo4j, nlp):
 
     # responsebest soll hier das Json-event der am Besten passenden Nachricht enthalten
     if responsebest != "Not found":
-        await mutil.send_notice_reply(bot, room.room_id, "Mit einem Score von " + str(best) + " wurde mit SpaCy folgendes gefunden" , responseevent)
+        if best >= threshold:
+            await mutil.send_notice_reply(bot, room.room_id, "Mit einem Score von " + str(best) + " wurde mit SpaCy folgendes gefunden" , responseevent)
 
     # sequence matching
 
@@ -365,12 +368,12 @@ async def new_message_handling(bot, message, room, neo4j, nlp):
             string2 += " "
 
         # Vergleichsscore
-        tmp = difflib.SequenceMatcher(None, string1, string2)
+        tmp = difflib.SequenceMatcher(None, string1.lower(), string2.lower())
         # score = tmp.ratio()
         liste = tmp.get_matching_blocks()
         sum = 0
         for lis in liste:
-            print(lis)
+            #print(lis)
             if lis[2] > 3:
                 sum += lis[2]
 
@@ -389,7 +392,8 @@ async def new_message_handling(bot, message, room, neo4j, nlp):
         f"create (c:chat {{text:'{nachricht}'}})-[:EVENT]->(j:json {{eventId:'{message.event_id}', timestamp:{message.server_timestamp}}})")
     # responsebest soll hier das Json-event der am Besten passenden Nachricht enthalten
     if responsebest != "Not found":
-        await mutil.send_notice_reply(bot, room.room_id, "Mit einem Score von " + str(best) + " wurde mit sequence matching folgendes gefunden" , responseevent)
+        if best >= threshold:
+            await mutil.send_notice_reply(bot, room.room_id, "Mit einem Score von " + str(best) + " wurde mit sequence matching folgendes gefunden" , responseevent)
 
 
 
