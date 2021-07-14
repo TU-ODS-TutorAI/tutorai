@@ -9,7 +9,7 @@ from HanTa import HanoverTagger as ht
 import spacy
 import matrix_util.matrix_util as mutil
 
-#threshold für Botantword zu Nachrichtenscore
+# Threshold für Botantwort zu Nachrichtenscore
 threshold = 0.0
 
 def score(chars, time):
@@ -401,7 +401,8 @@ async def new_message_handling(bot, message, room, neo4j, nlp):
     # mit send_message(room, "json der zu referenzierenden Nachricht") kann auf eine Nachricht referenziert werden
     # mit room.send_text("hier der zu sendende Text") kann Text direkt in den Raum geschickt werden
 
-
+# all following functions are deprecated
+# das hier ist nur für die alte SDK relevant, wurde aber für den Fall eines Rollbacks behalten
 def send_message(room, event, msgtype="m.text"):
     # room: Matrix-Raum-Objekt
     # event: zu referenzierende Nachricht als json Obket der Form die in new_event_handling gezeigt ist

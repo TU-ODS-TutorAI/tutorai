@@ -94,11 +94,16 @@ async def neo4j_volltextsuche(room, message):
 
 # wird ausgeführt auch wenn der Bot nicht angesprochen wird
 async def bot_callback_uncalled(room, event):
+    # handles messages when bot isn't called
+    # neo4j is a graph-object which is initialised in line 14
     await jutil.new_message_handling(bot, event, room, neo4j, nlp)
 
 
 # Handles an isis search
 async def isis_suche(room, message):
+    # selects relevant keywords from message (Noun, Verb, Pronoun) and build Cypher-Query
+    # returns notice-message containing findings from the Neo4j Database
+
     question = nlp(message.body[6:])
     #print(message.body)
     #print(message.body[6:])
@@ -162,7 +167,12 @@ async def bot_callback_preset(room, message):
 
 
 def main():
-
+    # main listener thread, subscribed to all chats the matrix bot has joined
+    # A neo4j Graph that is initialized is required
+    # To initialize:
+    # 1: /neo4j/InitializeMosesBase
+    # 2: /neo4j/InitializeVolltextSuche
+    # 3: /neo4j/InitializeIsis
     bot.add_message_listener(bot_callback_preset)
 
     bot.run()
