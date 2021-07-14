@@ -28,6 +28,8 @@ bot = botlib.Bot(creds)
 
 
 async def volltextsuche_moses(room, message):
+    # searches for a word in the mosesdb through the provided api through localhost:3000
+    # further documentation can be found in crawling/README.md
     nachricht = message.body[18:]
     nachricht = re.sub('[^A-Za-z0-9\-]+', ' ', nachricht)
     print(nachricht)
@@ -63,8 +65,9 @@ async def volltextsuche_moses(room, message):
 
 
 async def neo4j_volltextsuche(room, message):
-    # room: raum-objekt der matrix-sdk
-    # nachricht ohne das initiale !volltext
+    # Searches for the appearance of a word in a moses module, if it is
+    # found it sends back a message that contains all modules that contain said word
+    # it searches "word" + "word" + ... etc. ;meaning it searches all words independently
     nachricht = message.body[9:]
 
     doc = nlp(nachricht)
@@ -92,7 +95,6 @@ async def neo4j_volltextsuche(room, message):
         await mutil.send_notice_message(bot, room.room_id, 'Ich habe dazu etwas in diesen Modulen gefunden:\n' + ',\n'.join(search_results))
 
 
-# wird ausgeführt auch wenn der Bot nicht angesprochen wird
 async def bot_callback_uncalled(room, event):
     # handles messages when bot isn't called
     # neo4j is a graph-object which is initialised in line 14
@@ -105,8 +107,6 @@ async def isis_suche(room, message):
     # returns notice-message containing findings from the Neo4j Database
 
     question = nlp(message.body[6:])
-    #print(message.body)
-    #print(message.body[6:])
     for q in question:
         print(q.text, q.pos_)
     answer = ""
@@ -147,8 +147,10 @@ async def isis_suche(room, message):
 # Event_Handlers und Main Thread
 # Handles all the preset ways the bot interacts
 async def bot_callback_preset(room, message):
+    # additional ways how messages can be handled can be inserted here
     match = botlib.MessageMatch(room, message, bot)
 
+    # checks if and how the message should be handled
     if match.not_from_this_bot() and match.prefix(PREFIX):
         if match.command("volltext"):
             await neo4j_volltextsuche(room, message)
@@ -181,14 +183,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# TODO:
-# 1
-# learn from chat
-#
-# 1
-# have preset handlers do more than text
-#
-# 2
-# provide api that does not use matrix (http?)
-# https://matrix.org/docs/spec/client_server/latest#m-notice

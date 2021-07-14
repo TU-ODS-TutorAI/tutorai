@@ -40,7 +40,7 @@ if __name__ == '__main__':
 #     tokenizer="deepset/gelectra-large-germanquad"
 # )
 #
-# f = codecs.open("Test.txt", "r", "utf-8")
+# f = codecs.open("isis.txt", "r", "utf-8")
 # text = f.read()
 # f.close()
 # result = qa_pipeline({

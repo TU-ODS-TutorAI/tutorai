@@ -28,7 +28,7 @@ if __name__ == '__main__':
     neo4j = Graph("bolt://localhost:7687", auth=("neo4j", password))
     nlp = spacy.load("de_dep_news_trf")
 
-    f = codecs.open("Test.txt", "r", "utf-8")
+    f = codecs.open("isis.txt", "r", "utf-8")
     file = f.read()
     f.close()
     file = file.split("--!--")

@@ -12,6 +12,9 @@ import matrix_util.matrix_util as mutil
 # Threshold für Botantwort zu Nachrichtenscore
 threshold = 0.0
 
+
+# currently only the function new_message_handling() is being used
+
 def score(chars, time):
     chars_sum = chars_for_score(chars)
 
@@ -68,9 +71,9 @@ def get_event_id(json):
     return (json["event_id"])
 
 
-# oben: nützliche Funktionen
+# above: usable functions
 #################################################################
-# unten: nur für klassischen Ansatz relevant
+# below: functions no longer in use
 
 
 class Searchables:  # funktioniert momentan nur für einen Raum, da alle nachrichten zusammen gespeichert werden
@@ -146,7 +149,7 @@ def keyWordExtraction(user_question: str, language):
         tagged = tagger.tag_sent(words, taglevel=1)
 
         for tag in tagged:
-            #if (tag[2] == "NN" or tag[2] == "NE" or tag[2].startswith("V") or tag[2].startswith("AD")):
+            # if (tag[2] == "NN" or tag[2] == "NE" or tag[2].startswith("V") or tag[2].startswith("AD")):
             if (tag[2] == "NN" or tag[2] == "NE"):
                 key_words.append(tag[0])  # hier noch das lowercase keyword angefügt
     elif (language == "english"):
@@ -252,9 +255,9 @@ def json_do_your_thing(event, room):  # klassische Keywordsuche, Speicherung in 
     searchables.add_to(suffixfreie_usefprimkw, hash_suffrusefprimkw, json.dumps(event))
 
 
-# oben: nur für klassischen Ansatz relevant
-#################################################################
-# unten: vollständige Schnittstelle zum Matrixchat inkl. Funktionen für I/O
+# above: functions no longer in use
+#######################################################################################
+# below: relevant functions
 
 async def new_message_handling(bot, message, room, neo4j, nlp):
     """
@@ -298,13 +301,11 @@ async def new_message_handling(bot, message, room, neo4j, nlp):
     # klassischer Ansatz für die Datenverarbeitung; Probleme sind u.a. skaliert nur bedingt, da Nachrichten zur
     # Keywordsuche nur temporär gespeichert werden json_do_your_thing(event, room)
 
-
     # save message in neo4j
     nachricht = message.body
     message.body = "hi"
     nachricht = re.sub('[^A-Za-z0-9]+', ' ', nachricht)
 
-    # nachricht wird in Nomen und Eigennamen Zerlegt
     """
     keyWords =  keyWordExtraction(nachricht, "german")
     nachricht = ""
@@ -313,9 +314,6 @@ async def new_message_handling(bot, message, room, neo4j, nlp):
         nachricht += " "
     """
 
-    # print(json.dumps(event))
-    # ev = neo4j.run(f"match (c:chat {{text:'{nachricht}'}})-[:EVENT]->(j) return j.string").data()
-
     stringnlp = nlp(nachricht.lower())
     print(stringnlp)
 
@@ -323,11 +321,10 @@ async def new_message_handling(bot, message, room, neo4j, nlp):
     responsebest = "Not found"
     for query in neo4j.run("match (c:chat) return c.text").data():
         # spacy
-        # Vergleich der Nachricht mit den Nachrichtden der Datenbank
+        # compares the message with older messages
         querynlp = nlp(query['c.text'].lower())
 
-        # hier besseren Algorithmus zum Vergleich einfügen
-        tmp = stringnlp.similarity(querynlp)  # Vergleichsscore
+        tmp = stringnlp.similarity(querynlp)  # comparison score
 
         if tmp > best:
             print("got a winner")
@@ -338,15 +335,14 @@ async def new_message_handling(bot, message, room, neo4j, nlp):
                 reponsetime = response['j.timestamp']
                 best = tmp
 
-    # responsebest soll hier das Json-event der am Besten passenden Nachricht enthalten
+    # responsebest should hold the JSON-Event which is the closest match
     if responsebest != "Not found":
         if best >= threshold:
-            await mutil.send_notice_reply(bot, room.room_id, "Mit einem Score von " + str(best) + " wurde mit SpaCy folgendes gefunden" , responseevent)
+            await mutil.send_notice_reply(bot, room.room_id,
+                                          "Mit einem Score von " + str(best) + " wurde mit SpaCy folgendes gefunden",
+                                          responseevent)
 
     # sequence matching
-
-    # vergleichsscore kommt in tmp rein
-
     nachrichten = keyWordExtraction(nachricht, "german")
     nachricht = ""
     leng = 1
@@ -367,13 +363,11 @@ async def new_message_handling(bot, message, room, neo4j, nlp):
             string2 += n
             string2 += " "
 
-        # Vergleichsscore
+        # comparison score
         tmp = difflib.SequenceMatcher(None, string1.lower(), string2.lower())
-        # score = tmp.ratio()
         liste = tmp.get_matching_blocks()
         sum = 0
         for lis in liste:
-            #print(lis)
             if lis[2] > 3:
                 sum += lis[2]
 
@@ -381,25 +375,21 @@ async def new_message_handling(bot, message, room, neo4j, nlp):
 
         if score > best:
             print("got a winner")
-            for response in neo4j.run(f"match (c:chat {{text:'{query['c.text']}'}})-[:EVENT]->(j) return j.eventId, j.timestamp").data():
+            for response in neo4j.run(
+                    f"match (c:chat {{text:'{query['c.text']}'}})-[:EVENT]->(j) return j.eventId, j.timestamp").data():
                 responsebest = query['c.text']
                 responseevent = response['j.eventId']
                 reponsetime = response['j.timestamp']
                 best = score
 
-    # Einfügen der neuen Nachricht in den Graphen
+    # adds the new message to the graph
     neo4j.run(
         f"create (c:chat {{text:'{nachricht}'}})-[:EVENT]->(j:json {{eventId:'{message.event_id}', timestamp:{message.server_timestamp}}})")
-    # responsebest soll hier das Json-event der am Besten passenden Nachricht enthalten
     if responsebest != "Not found":
         if best >= threshold:
-            await mutil.send_notice_reply(bot, room.room_id, "Mit einem Score von " + str(best) + " wurde mit sequence matching folgendes gefunden" , responseevent)
+            await mutil.send_notice_reply(bot, room.room_id, "Mit einem Score von " + str(
+                best) + " wurde mit sequence matching folgendes gefunden", responseevent)
 
-
-
-    # hier kann weitere Funktionalität angebunden werden
-    # mit send_message(room, "json der zu referenzierenden Nachricht") kann auf eine Nachricht referenziert werden
-    # mit room.send_text("hier der zu sendende Text") kann Text direkt in den Raum geschickt werden
 
 # all following functions are deprecated
 # das hier ist nur für die alte SDK relevant, wurde aber für den Fall eines Rollbacks behalten
