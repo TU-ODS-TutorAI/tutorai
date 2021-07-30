@@ -17,3 +17,22 @@
 | Name  | Type   | Description         |
 | ----- | ------ | ------------------- |
 | answere | String |                   |
+
+
+### API URL
+ ```
+/tutorai/machine_learning_with_module/<question>/<module_number> (GET)
+```
+
+### Argument
+
+| Name     | Type   | Required | Constraint | Description |
+| -------- | ------ | -------- | ---------- | ----------- |
+| question | String | yes      |            |             |
+| module_number  | int | yes      |            | Module Id Number            |
+
+### Return
+
+| Name  | Type   | Description         |
+| ----- | ------ | ------------------- |
+| answere | String |                   |
